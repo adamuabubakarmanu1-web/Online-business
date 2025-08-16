@@ -1,4 +1,4 @@
-/* Basic Reset */
+/* Tsarin farko na CSS */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body {
   background: #f4f4f4;
 }
 
-/* Container */
+/* Akwatin babban abun ciki */
 .container {
   width: 200%;
   max-width: 1200px;  /* iyakar faɗin content */
@@ -19,7 +19,7 @@ body {
   padding: 0 20px;
 }
 
-/* ===== Header (centered) ===== */
+/* ===== Shafi na sama (mai tsakiya) ===== */
 header {
   display: flex;
   flex-direction: column;   /* jera su sama zuwa ƙasa */
@@ -55,14 +55,15 @@ header nav ul li a {
 }
 
 header nav ul li a.active {
-  color: yellow; /* page da kake kai */
+  color: yellow; /* shafin da kake ciki */
 }
 
 header .cart {
   margin-top: 10px;
   font-size: 18px;
 }
-/* Hero Section */
+
+/* Sashen babban hoto */
 .hero {
   text-align: center;
   padding: 50px 20px;
@@ -84,7 +85,7 @@ header .cart {
   border-radius: 5px;
 }
 
-/* Featured Products */
+/* Fitattun kayayyaki */
 .featured {
   padding: 40px 0;
   text-align: center;
@@ -115,7 +116,7 @@ header .cart {
   margin: 10px 0;
 }
 
-/* Footer */
+/* Shafi na ƙasa */
 footer {
   text-align: center;
   padding: 15px;
@@ -123,7 +124,8 @@ footer {
   color: #fff;
   margin-top: 30px;
 }
-/* About Page */
+
+/* Shafin game da mu */
 .about {
   max-width: 2000px;
   margin: 20px auto;
@@ -147,7 +149,7 @@ footer {
   margin-left: 20px;
 }
 
-/* Shop Page */
+/* Shafin shago */
 .shop {
   padding: 30px;
   text-align: center;
@@ -158,6 +160,7 @@ footer {
   color: #007bff;
 }
 
+/* Jerin kayayyaki */
 .product-grid {
   display: flex;
   justify-content: center;
@@ -183,7 +186,7 @@ footer {
   margin: 10px 0;
 }
 
-/* 🔹 Special Offers Page */
+/* 🔹 Shafin Taya Musamman */
 .offers {
   padding: 40px 20px;
   text-align: center;
@@ -193,7 +196,7 @@ footer {
 .offers h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
-  color: #d35400; /* Orange style */
+  color: #d35400; /* Launin lemo */
 }
 
 .offers p {
@@ -247,7 +250,7 @@ footer {
 }
 
 .offers .product strong {
-  color: #e74c3c; /* Red discounted price */
+  color: #e74c3c; /* Farashin rangwame */
   font-size: 1.1rem;
 }
 
@@ -264,7 +267,8 @@ footer {
 .offers .product button:hover {
   background: #e67e22;
 }
-/* 🔹 Reviews Section */
+
+/* 🔹 Sashen Rahotanni */
 .reviews {
   max-width: 800px;
   margin: 40px auto;
@@ -304,7 +308,7 @@ footer {
   color: #555;
 }
 
-/* 🔹 Review Form */
+/* 🔹 Fom na rahotanni */
 form {
   display: flex;
   flex-direction: column;
@@ -340,7 +344,7 @@ form button:hover {
   background: #0056b3;
 }
 
-/* 🔹 FAQs Section */
+/* 🔹 Sashen Tambayoyi (FAQs) */
 .faqs {
   max-width: 800px;
   margin: 40px auto;
@@ -375,7 +379,8 @@ form button:hover {
   padding: 10px;
   color: #555;
 }
-/* 🔹 Checkout Section */
+
+/* 🔹 Sashen Biyan Kuɗi */
 .checkout {
   max-width: 500px;
   margin: 40px auto;
@@ -418,7 +423,8 @@ form button:hover {
 .checkout button:hover {
   background: #218838;
 }
-/* 🔹 Contact Section */
+
+/* 🔹 Sashen Tuntuɓar Mu */
 .contact {
   max-width: 500px;
   margin: 40px auto;
