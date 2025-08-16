@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.0">
+  <title>Biz Group 4 - Homepage</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+ 
+  <!-- 🔹 Header / Navigation -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">Biz Group 4</div>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="AboutUs.HTML">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="offers.html">Special Offers</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="cart">
+        🛒 <span id="cart-count">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🔹 Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Welcome to Biz Group 4 Store</h1>
+      <p>Your one-stop shop for amazing products at the best prices!</p>
+      <a href="shop.html" class="btn">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- 🔹 Featured Products -->
+  <section class="featured">
+    <div class="container">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+        <div class="product">
+          <img src="images/product1.jpg" alt="Product 1">
+          <h3>Product One</h3>
+          <p>$20.00</p>
+          <button onclick="addToCart('Product One', 20)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img src="images/product2.jpg" alt="Product 2">
+          <h3>Product Two</h3>
+          <p>$35.00</p>
+          <button onclick="addToCart('Product Two', 35)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img src="images/product3.jpg" alt="Product 3">
+          <h3>Product Three</h3>
+          <p>$15.00</p>
+          <button onclick="addToCart('Product Three', 15)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔹 Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+    </div>
+  </footer>
+  
+</body>
+</html>

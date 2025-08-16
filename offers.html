@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Offers - Biz Group 4</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Biz Group 4</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="offers.html" class="active">Special Offers</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="faqs.html">FAQs</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="cart">
+      🛒 <span id="cart-count">0</span>
+    </div>
+  </header>
+
+  <!-- Special Offers Section -->
+  <section class="offers">
+    <h1>Special Offers 🎉</h1>
+    <p>Grab these amazing deals before they expire!</p>
+
+    <div class="product-grid">
+
+      <div class="product">
+        <img src="images/product1.jpg" alt="Product 1">
+        <h3>Product One</h3>
+        <p><del>$20.00</del> <strong>$15.00</strong></p>
+        <button onclick="addToCart('Product One - Offer', 15)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="images/product2.jpg" alt="Product 2">
+        <h3>Product Two</h3>
+        <p><del>$35.00</del> <strong>$25.00</strong></p>
+        <button onclick="addToCart('Product Two - Offer', 25)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="images/product3.jpg" alt="Product 3">
+        <h3>Product Three</h3>
+        <p><del>$15.00</del> <strong>$10.00</strong></p>
+        <button onclick="addToCart('Product Three - Offer', 10)">Add to Cart</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - Biz Group 4</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Biz Group 4</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html" class="active">Shop</a></li>
+        <li><a href="offers.html">Special Offers</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="faqs.html">FAQs</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="cart">
+      🛒 <span id="cart-count">0</span>
+    </div>
+  </header>
+
+  <!-- Product Details Section -->
+  <section class="product-details">
+    <div class="product-image">
+      <img src="images/product1.jpg" alt="Product One">
+    </div>
+    <div class="product-info">
+      <h1>Product One</h1>
+      <p class="price">$20.00</p>
+      <p class="description">
+        This is Product One. It’s high-quality, affordable, and perfect for your needs. 
+        Order now and enjoy fast delivery!
+      </p>
+      <button onclick="addToCart('Product One', 20)">Add to Cart</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

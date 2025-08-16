@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Reviews - Biz Group 4</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header>
+    <div class="logo">Biz Group 4</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="offers.html">Special Offers</a></li>
+        <li><a href="reviews.html" class="active">Reviews</a></li>
+        <li><a href="faqs.html">FAQs</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="cart">
+      🛒 <span id="cart-count">0</span>
+    </div>
+  </header>
+
+  <!-- Reviews Section -->
+  <section class="reviews">
+    <h1>Customer Reviews</h1>
+
+    <!-- Existing Reviews -->
+    <div id="review-list">
+      <div class="review">
+        <h3>Aliyu</h3>
+        <p>Great products and fast delivery! ⭐⭐⭐⭐⭐</p>
+      </div>
+      <div class="review">
+        <h3>Zainab</h3>
+        <p>Quality is amazing, will shop again. ⭐⭐⭐⭐</p>
+      </div>
+    </div>
+
+    <!-- Add Review Form -->
+    <h2>Add Your Review</h2>
+    <form onsubmit="addReview(event)">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <textarea id="message" placeholder="Write your review..." required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
