@@ -1,13 +1,6 @@
 // 🔹 Lissafin kayan da aka saka a Cart
 let cartCount = 0;
 
-// 🔹 Aiki na ƙara kaya zuwa Cart
-function addToCart(productName, price) {
-  cartCount++; // ƙara yawan kayan
-  document.getElementById("cart-count").innerText = cartCount; // sabunta adadin a UI
-  alert(productName + " added to cart! Price: $" + price); // sanar da mai amfani
-}
-
 // 🔹 Nuna ko ɓoye sashen Team (a shafin About Us)
 function toggleTeam() {
   let teamList = document.getElementById("team");
@@ -88,6 +81,7 @@ function validateCheckout(event) {
 
   // idan komai ya cika
   alert("Thank you, " + fullName + "! Your order has been placed.");
+  clearCart(); // a share cart bayan an yi order
   event.target.reset(); // tsaftace form
   return true;
 }
@@ -110,4 +104,67 @@ function validateContact(event) {
   alert("Thank you, " + name + "! Your message has been sent.");
   event.target.reset(); // tsaftace form
   return true;
+}
+
+// 🔹 Cart array zai adana products a LocalStorage
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// 🔹 Add to Cart function (haɗe da count + LocalStorage)
+function addToCart(name, price) {
+  // ƙara yawan items a UI
+  cartCount++;
+  let countElement = document.getElementById("cart-count");
+  if (countElement) {
+    countElement.innerText = cartCount;
+  }
+
+  // duba ko item yana cikin cart
+  let existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ name: name, price: price, quantity: 1 });
+  }
+
+  saveCart();
+  updateCheckoutTotal(); // sabunta total a checkout
+  alert(name + " added to cart!");
+}
+
+// 🔹 Ajiye cart a localStorage
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// 🔹 Neman total price
+function getCartTotal() {
+  return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+}
+
+// 🔹 Update checkout total
+function updateCheckoutTotal() {
+  let totalElement = document.getElementById("checkoutTotal");
+  if (totalElement) {
+    totalElement.innerText = getCartTotal().toFixed(2);
+  }
+}
+
+// 🔹 Clear cart (idan aka yi order)
+function clearCart() {
+  cart = [];
+  cartCount = 0;
+  saveCart();
+
+  // sabunta cart count UI
+  let countElement = document.getElementById("cart-count");
+  if (countElement) {
+    countElement.innerText = cartCount;
+  }
+
+  updateCheckoutTotal();
+}
+
+// 🔹 Kira update lokacin da page din checkout ya buɗe
+window.onload = function() {
+  updateCheckoutTotal();
 }
