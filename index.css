@@ -1,1 +1,477 @@
-xnmmjjnnnbb
+/* Tsarin farko na CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #f4f4f4;
+}
+
+/* Akwatin babban abun ciki */
+.container {
+  width: 200%;
+  max-width: 1200px;  /* iyakar faɗin content */
+  margin: 0 auto;     /* tsayar da shi tsakiya */
+  padding: 0 20px;
+}
+
+/* ===== Shafi na sama (mai tsakiya) ===== */
+header {
+  display: flex;
+  flex-direction: column;   /* jera su sama zuwa ƙasa */
+  align-items: center;      /* duk su tsaya tsakiya */
+  background: #222;
+  color: #fff;
+  padding: 15px;
+}
+
+header .logo {
+  
+  font-size: 100px;
+   
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;  /* menu ya tsaya tsakiya */
+  flex-wrap: wrap;        /* idan sun yi yawa, su gangaro ƙasa */
+  padding: 0;
+  margin: 10px 0;
+}
+
+header nav ul li {
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header nav ul li a.active {
+  color: yellow; /* shafin da kake ciki */
+}
+
+header .cart {
+  margin-top: 10px;
+  font-size: 100px;
+}
+
+/* Sashen babban hoto */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background: #e3f2fd;
+}
+
+.hero h1 {
+  font-size: 100px;
+  margin-bottom: 10px;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Fitattun kayayyaki */
+.featured {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;        /* don ya yi responsive */
+  justify-content: center;
+  gap: 20px;
+}
+
+.product {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 220px;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product h3 {
+  margin: 10px 0;
+}
+
+/* Shafi na ƙasa */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #222;
+  color: #fff;
+  margin-top: 30px;
+}
+
+/* Shafin game da mu */
+.about {
+  max-width: 2000px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.about h1, .about h2 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.about p {
+  margin-bottom: 150px;
+}
+
+.about ul {
+  list-style: square;
+  margin-left: 20px;
+}
+
+/* Shafin shago */
+.shop {
+  padding: 30px;
+  text-align: center;
+}
+
+.shop h1 {
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+/* Jerin kayayyaki */
+.product-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* domin su iya sauka ƙasa idan sun cika */
+  gap: 20px;
+}
+
+.product {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 200px;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product h3 {
+  margin: 10px 0;
+}
+
+/* 🔹 Shafin Taya Musamman */
+.offers {
+  padding: 40px 20px;
+  text-align: center;
+  background: #fff8f0;
+}
+
+.offers h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #d35400; /* Launin lemo */
+}
+
+.offers p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.offers .product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.offers .product {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.offers .product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.offers .product img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.offers .product h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+.offers .product p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.offers .product del {
+  color: #888;
+  margin-right: 8px;
+}
+
+.offers .product strong {
+  color: #e74c3c; /* Farashin rangwame */
+  font-size: 1.1rem;
+}
+
+.offers .product button {
+  background: #d35400;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.offers .product button:hover {
+  background: #e67e22;
+}
+
+/* 🔹 Sashen Rahotanni */
+.reviews {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.reviews h1, 
+.reviews h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#review-list {
+  margin-bottom: 30px;
+}
+
+.review {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #007bff;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.review h3 {
+  margin: 0 0 5px 0;
+  color: #007bff;
+}
+
+.review p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 🔹 Fom na rahotanni */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form input, 
+form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+form button {
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background: #0056b3;
+}
+
+/* 🔹 Sashen Tambayoyi (FAQs) */
+.faqs {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.faqs h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  border-left: 4px solid #007bff;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.faq-item h3 {
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.faq-item .answer {
+  display: none;
+  padding: 10px;
+  color: #555;
+}
+
+/* 🔹 Sashen Biyan Kuɗi */
+.checkout {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.checkout h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.checkout form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkout input {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.checkout button {
+  padding: 12px;
+  font-size: 16px;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.checkout button:hover {
+  background: #218838;
+}
+
+/* 🔹 Sashen Tuntuɓar Mu */
+.contact {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.contact h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact input,
+.contact textarea {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.contact textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.contact button {
+  padding: 12px;
+  font-size: 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact button:hover {
+  background: #0056b3;
+}
