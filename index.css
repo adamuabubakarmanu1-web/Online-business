@@ -13,7 +13,7 @@ body {
 
 /* Akwatin babban abun ciki */
 .container {
-  width: 200%;
+  width: 100%;
   max-width: 1200px;  /* iyakar faɗin content */
   margin: 0 auto;     /* tsayar da shi tsakiya */
   padding: 0 20px;
