@@ -2,6 +2,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Hamburger Button */
+    #hamburger-menu {
+      font-size: 30px;
+      cursor: pointer;
+      padding: 15px;
+      background: #0066cc;
+      color: white;
+      width: 60px;
+      text-align: center;
+      user-select: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      border-radius: 8px;
+    }
+
+    /* Nav Menu (hidden by default) */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -250px; /* boye a gefe */
+      width: 220px;
+      height: 100%;
+      background: #0066cc;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+    }
+
+    .nav-menu a {
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #004080;
+      transition: background 0.2s;
+    }
+
+    .nav-menu a:hover {
+      background: #0056b3;
+    }
+
+    .nav-menu a:last-child {
+      border-bottom: none;
+    }
+
+    /* Nuna menu idan an danna */
+    .nav-menu.active {
+      left: 0; /* fito daga hagu */
+    }
+  </style>
+
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=0.4">
   <title>review👁️‍🗨️</title>
@@ -12,6 +74,18 @@
  
   <!-- 🔹 Header / Navigation -->
   <header>
+<!-- Hamburger button -->
+  <div id="hamburger-menu">☰</div>
+
+  <!-- Nav menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="index.html">🏠 Home</a>
+    <a href="#">ℹ️ About</a>
+    <a href="#">💼 Services</a>
+    <a href="#">📞 Contact</a>
+  </div>
+
+    
     <div class="container header-container">
       <div class="logo" align="center">review👁</div>
       <nav>
@@ -62,5 +136,23 @@
     <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
   </footer>
 
+  <script>
+    const hamburger = document.getElementById('hamburger-menu');
+    const navMenu = document.getElementById('navMenu');
+
+    // Toggle menu idan an danna hamburger
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Rufe menu idan aka danna link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+
+  
 </body>
 </html>
