@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+  <title>About Us</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background: #f9f9f9;
     }
 
     /* Hamburger Button */
@@ -24,11 +28,11 @@
       border-radius: 8px;
     }
 
-    /* Nav Menu (hidden by default) */
+    /* Nav Menu */
     .nav-menu {
       position: fixed;
       top: 0;
-      left: -250px; /* boye a gefe */
+      left: -250px;
       width: 220px;
       height: 100%;
       background: #0066cc;
@@ -45,83 +49,144 @@
       text-decoration: none;
       font-weight: bold;
       border-bottom: 1px solid #004080;
-      transition: background 0.2s;
     }
 
     .nav-menu a:hover {
       background: #0056b3;
     }
 
-    .nav-menu a:last-child {
-      border-bottom: none;
+    .nav-menu.active {
+      left: 0;
     }
 
-    /* Nuna menu idan an danna */
-    .nav-menu.active {
-      left: 0; /* fito daga hagu */
+    /* Header */
+    header {
+      background: #004080;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    header nav ul li {
+      display: inline;
+    }
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* About Section */
+    .about {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .about h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #007bff;
+    }
+    .about h2 {
+      margin: 20px 0 10px;
+      color: #333;
+    }
+    .about p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #555;
+      text-align: justify;
+    }
+
+    /* Team Section */
+    .team {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .team h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+    .member {
+      display: inline-block;
+      margin: 15px;
+      text-align: center;
+    }
+    .member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    /* Footer */
+    footer {
+      background: #004080;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
     }
   </style>
-
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title>Biz Group 4 - Homepage</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="index.js" defer></script>
-  
 </head>
 <body>
- 
-  <!-- 🔹 Header / Navigation -->
-  <header>
 
-  <!-- Hamburger button -->
+  <!-- 🔹 Hamburger button -->
   <div id="hamburger-menu">☰</div>
-  <!-- Nav menu -->
+
+  <!-- 🔹 Side Nav -->
   <div class="nav-menu" id="navMenu">
     <a href="index.html">🏠 Home</a>
-    <a href="profile.html">🚹Profile</a>
+    <a href="profile.html">🚹 Profile</a>
     <a href="delivery.html">🛳️ Delivery order</a>
     <a href="setting.html">☸️ Setting</a>
   </div>
-    
-  
-    <div class="container header-container">
-      <div class="logo" align="center">About Us</div>
-      <nav>
 
-
-
-
-      <nav>
-          <li><a href="aboutus.html">About Us</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="offers.html">Special Offers</a></li>
-          <li><a href="reviews.html">Reviews</a></li>
-          <li><a href="faqs.html">FAQs</a></li>
-          <li><a href="checkout.html">Checkout</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="cart">
-        🛒 <span id="cart-count">0</span>
-      </div>
-    </div>
+  <!-- 🔹 Header -->
+  <header>
+    <div class="logo">About Us</div>
+    <nav>
+      <ul>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="offers.html">Special Offers</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="faqs.html">FAQs</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
   </header>
-
 
   <!-- 🔹 About Section -->
   <section class="about">
     <h1>About Biz Group 4</h1>
     <p>
       Biz Group 4 is a student project e-commerce website created to showcase and sell
-      amazing products online. Our mission is to learn and apply web technologies in 
+      amazing products online. Our mission is to learn and apply web technologies in
       real-world applications.
     </p>
-
     <h2>Our Mission</h2>
     <p>To provide quality products and seamless shopping experience.</p>
-
     <h2>Our Vision</h2>
     <p>To become a leading student-driven online marketplace.</p>
   </section>
@@ -129,7 +194,7 @@
   <!-- 🔹 Team Section -->
   <section class="team">
     <h2>Meet Our Team</h2>
-    <button onclick="toggleTeam()"><h1>Show/Hide Team</h1></button>
+    <button onclick="toggleTeam()">Show/Hide Team</button>
     <div id="team" style="display: none;">
       <div class="member">
         <img src="FB_IMG_17554287061601160.jpg.jpg" alt="Member 1">
@@ -154,24 +219,22 @@
     <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
   </footer>
 
-<script>
+  <script>
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('navMenu');
-
-    // Toggle menu idan an danna hamburger
     hamburger.addEventListener('click', () => {
       navMenu.classList.toggle('active');
     });
-
-    // Rufe menu idan aka danna link
     document.querySelectorAll('.nav-menu a').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
       });
     });
+    function toggleTeam() {
+      const team = document.getElementById('team');
+      team.style.display = (team.style.display === "none") ? "block" : "none";
+    }
   </script>
 
-
-    
 </body>
 </html>
