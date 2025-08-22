@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+  <title>Biz Group 4 - Delivery</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    /* Hamburger */
+    #hamburger-menu {
+      font-size: 30px;
+      cursor: pointer;
+      padding: 15px;
+      background: #0066cc;
+      color: white;
+      width: 60px;
+      text-align: center;
+      user-select: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      border-radius: 8px;
+    }
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 220px;
+      height: 100%;
+      background: #0066cc;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+    }
+    .nav-menu a {
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #004080;
+    }
+    .nav-menu a:hover { background: #0056b3; }
+    .nav-menu.active { left: 0; }
+
+    /* Header */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      margin-left: 80px;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #0066cc;
+    }
+    nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+    nav ul li { margin: 0 10px; }
+    nav ul li a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+    }
+    nav ul li a:hover { color: #0066cc; }
+
+    /* Delivery Section */
+    .delivery-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .delivery-container h2 {
+      text-align: center;
+      color: #0066cc;
+      margin-bottom: 20px;
+    }
+
+    .order {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+    }
+    .order img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+    .order-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .status {
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+    .pending {
+      background: #ffcc00;
+      color: #333;
+    }
+    .delivered {
+      background: #4caf50;
+      color: white;
+    }
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-deliver {
+      background: #0066cc;
+      color: white;
+    }
+    .btn-deliver:hover { background: #004c99; }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Header -->
+  <header>
+    <div id="hamburger-menu">☰</div>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">🏠 Home</a>
+      <a href="profile.html">🚹 Profile</a>
+      <a href="delivery.html">🛳️ Delivery order</a>
+      <a href="setting.html">☸️ Setting</a>
+    </div>
+
+    <div class="container header-container">
+      <div class="logo">Biz Group 4</div>
+      <nav>
+        <ul>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="offers.html">Special Offers</a></li>
+          <li><a href="Mreviews.html">Reviews</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <a href="checkout.html"><h3>🛒 Cart (<span id="cart-count">0</span>)</h3></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🔹 Delivery Orders -->
+  <main>
+    <div class="delivery-container">
+      <h2>📦 Your Orders</h2>
+      <div id="ordersList"></div>
+    </div>
+  </main>
+
+  <!-- 🔹 Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- 🔹 JS -->
+  <script>
+    const hamburger = document.getElementById('hamburger-menu');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+    // Load Orders from localStorage
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    function renderOrders() {
+      const ordersList = document.getElementById("ordersList");
+      ordersList.innerHTML = "";
+
+      if (orders.length === 0) {
+        ordersList.innerHTML = "<p style='text-align:center;color:#777;'>No orders yet.</p>";
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        const orderDiv = document.createElement("div");
+        orderDiv.classList.add("order");
+
+        orderDiv.innerHTML = `
+          <div class="order-info">
+            <img src="${order.image}" alt="${order.name}">
+            <div>
+              <h4>${order.name}</h4>
+              <p>₦${order.price} x ${order.qty}</p>
+            </div>
+          </div>
+          <div>
+            <span class="status ${order.status}">${order.status.toUpperCase()}</span>
+            ${order.status === "pending" ? `<button class="btn btn-deliver" onclick="markDelivered(${index})">Mark as Delivered</button>` : ""}
+          </div>
+        `;
+        ordersList.appendChild(orderDiv);
+      });
+    }
+
+    function markDelivered(index) {
+      orders[index].status = "delivered";
+      localStorage.setItem("orders", JSON.stringify(orders));
+      renderOrders();
+    }
+
+    renderOrders();
+  </script>
+
+</body>
+</html>
