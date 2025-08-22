@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+  <title>Biz Group 4 - Profile</title>
+  
+</head>
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    /* Hamburger */
+    #hamburger-menu {
+      font-size: 30px;
+      cursor: pointer;
+      padding: 15px;
+      background: #0066cc;
+      color: white;
+      width: 60px;
+      text-align: center;
+      user-select: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      border-radius: 8px;
+    }
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 220px;
+      height: 100%;
+      background: #0066cc;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+    }
+    .nav-menu a {
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #004080;
+    }
+    .nav-menu a:hover { background: #0056b3; }
+    .nav-menu.active { left: 0; }
+
+    /* Header */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      margin-left: 80px;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #0066cc;
+    }
+    nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+    nav ul li { margin: 0 10px; }
+    nav ul li a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+    }
+    nav ul li a:hover { color: #0066cc; }
+
+    /* Profile Card */
+    .profile-card {
+      max-width: 450px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #0066cc;
+    }
+    .btn {
+      margin: 10px 5px;
+      padding: 8px 15px;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #004c99; }
+    .profile-info h3 { margin: 15px 0 5px; }
+    .profile-info p { margin: 4px 0; color: #555; }
+
+    /* Inputs hidden by default */
+    .edit-input {
+      display: none;
+      margin: 8px 0;
+      padding: 8px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Header / Navigation -->
+  <header>
+    <div id="hamburger-menu">☰</div>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">🏠 Home</a>
+      <a href="profile.html">🚹 Profile</a>
+      <a href="delivery.html">🛳️ Delivery order</a>
+      <a href="setting.html">☸️ Setting</a>
+    </div>
+
+    <div class="container header-container">
+      <div class="logo">Biz Group 4</div>
+      <nav>
+        <ul>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="offers.html">Special Offers</a></li>
+          <li><a href="Mreviews.html">Reviews</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <a href="checkout.html"><h3>🛒 Cart (<span id="cart-count">0</span>)</h3></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🔹 Profile Section -->
+  <main>
+    <div class="profile-card">
+      <img id="profileImage" src="https://via.placeholder.com/130" alt="Profile" class="profile-pic">
+      <input type="file" id="fileInput" style="display:none" accept="image/*">
+
+      <div class="profile-info">
+        <h3 id="displayName">John Doe</h3>
+        <input type="text" id="editName" class="edit-input" placeholder="Enter new name">
+        <p id="displayEmail"><strong>Email:</strong> johndoe@email.com</p>
+        <input type="email" id="editEmail" class="edit-input" placeholder="Enter new email">
+        <p><strong>Member Since:</strong> Jan 2025</p>
+      </div>
+
+      <!-- Buttons -->
+      <button class="btn" id="editBtn">✏️ Edit Profile</button>
+      <button class="btn" id="saveBtn" style="display:none;">💾 Save</button>
+      <button class="btn" id="changePhotoBtn" style="display:none;">📷 Change Photo</button>
+    </div>
+  </main>
+
+  <!-- 🔹 Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- 🔹 JS -->
+  <script>
+    const hamburger = document.getElementById('hamburger-menu');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+    // Profile Elements
+    const editBtn = document.getElementById('editBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const changePhotoBtn = document.getElementById('changePhotoBtn');
+    const fileInput = document.getElementById('fileInput');
+    const profileImage = document.getElementById('profileImage');
+
+    const displayName = document.getElementById('displayName');
+    const displayEmail = document.getElementById('displayEmail');
+    const editName = document.getElementById('editName');
+    const editEmail = document.getElementById('editEmail');
+
+    // Edit Mode
+    editBtn.addEventListener('click', () => {
+      editBtn.style.display = "none";
+      saveBtn.style.display = "inline-block";
+      changePhotoBtn.style.display = "inline-block";
+
+      editName.style.display = "block";
+      editEmail.style.display = "block";
+
+      editName.value = displayName.innerText;
+      editEmail.value = displayEmail.innerText.replace("Email: ", "");
+    });
+
+    // Save Changes
+    saveBtn.addEventListener('click', () => {
+      displayName.innerText = editName.value;
+      displayEmail.innerHTML = "<strong>Email:</strong> " + editEmail.value;
+
+      editName.style.display = "none";
+      editEmail.style.display = "none";
+      saveBtn.style.display = "none";
+      changePhotoBtn.style.display = "none";
+      editBtn.style.display = "inline-block";
+    });
+
+    // Change Photo
+    changePhotoBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => profileImage.src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
