@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+  <title>Biz Group 4 - Settings</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    /* Hamburger */
+    #hamburger-menu {
+      font-size: 30px;
+      cursor: pointer;
+      padding: 15px;
+      background: #0066cc;
+      color: white;
+      width: 60px;
+      text-align: center;
+      user-select: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      border-radius: 8px;
+    }
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 220px;
+      height: 100%;
+      background: #0066cc;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+    }
+    .nav-menu a {
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #004080;
+    }
+    .nav-menu a:hover { background: #0056b3; }
+    .nav-menu.active { left: 0; }
+
+    /* Header */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      margin-left: 80px;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #0066cc;
+    }
+    nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+    nav ul li { margin: 0 10px; }
+    nav ul li a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+    }
+    nav ul li a:hover { color: #0066cc; }
+
+    /* Settings */
+    .settings-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .settings-container h2 {
+      text-align: center;
+      color: #0066cc;
+      margin-bottom: 20px;
+    }
+
+    .profile-pic {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .profile-pic img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #0066cc;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .btn {
+      display: inline-block;
+      background: #0066cc;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #004c99; }
+
+    .btn-danger {
+      background: #e63946;
+    }
+    .btn-danger:hover {
+      background: #c62828;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Header -->
+  <header>
+    <div id="hamburger-menu">☰</div>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">🏠 Home</a>
+      <a href="profile.html">🚹 Profile</a>
+      <a href="delivery.html">🛳️ Delivery order</a>
+      <a href="setting.html">☸️ Setting</a>
+    </div>
+
+    <div class="container header-container">
+      <div class="logo">Biz Group 4</div>
+      <nav>
+        <ul>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="offers.html">Special Offers</a></li>
+          <li><a href="Mreviews.html">Reviews</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <a href="checkout.html"><h3>🛒 Cart (<span id="cart-count">0</span>)</h3></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🔹 Settings -->
+  <main>
+    <div class="settings-container">
+      <h2>⚙️ Settings</h2>
+
+      <!-- Profile Picture -->
+      <div class="profile-pic">
+        <img id="profileImage" src="default-profile.png" alt="Profile">
+      </div>
+      <div class="form-group">
+        <label for="profilePicUpload">Change Profile Picture:</label>
+        <input type="file" id="profilePicUpload" accept="image/*">
+      </div>
+
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Change Username:</label>
+        <input type="text" id="username" placeholder="Enter new name">
+      </div>
+
+      <!-- Save Button -->
+      <button class="btn" onclick="saveSettings()">💾 Save Changes</button>
+      <button class="btn btn-danger" onclick="logout()">🚪 Logout</button>
+    </div>
+  </main>
+
+  <!-- 🔹 Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- 🔹 JS -->
+  <script>
+    const hamburger = document.getElementById('hamburger-menu');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+    // Load data
+    let userData = JSON.parse(localStorage.getItem("userData")) || {
+      name: "Guest User",
+      image: "default-profile.png"
+    };
+
+    document.getElementById("username").value = userData.name;
+    document.getElementById("profileImage").src = userData.image;
+
+    // Upload Image
+    document.getElementById("profilePicUpload").addEventListener("change", function(event){
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e){
+          document.getElementById("profileImage").src = e.target.result;
+          userData.image = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Save Settings
+    function saveSettings() {
+      const newName = document.getElementById("username").value.trim();
+      if(newName) {
+        userData.name = newName;
+      }
+      localStorage.setItem("userData", JSON.stringify(userData));
+      alert("✅ Settings saved successfully!");
+    }
+
+    // Logout
+    function logout() {
+      if(confirm("Are you sure you want to logout?")) {
+        localStorage.removeItem("userData");
+        location.reload();
+      }
+    }
+  </script>
+
+</body>
+</html>
