@@ -1,93 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+  <title>FAQs - Biz Group 4</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+    /* 🔹 General Reset & Variables */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --secondary: #10b981;
+      --accent: #8b5cf6;
+      --dark: #0f172a;
+      --dark-light: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s ease;
     }
 
-    /* Hamburger Button */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--dark-light));
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a { 
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* 🔹 Hamburger Button */
     #hamburger-menu {
-      font-size: 30px;
+      font-size: 24px;
       cursor: pointer;
-      padding: 15px;
-      background: #0066cc;
+      padding: 12px;
+      background: var(--gradient);
       color: white;
-      width: 60px;
+      width: 50px;
+      height: 50px;
       text-align: center;
       user-select: none;
       position: fixed;
-      top: 10px;
-      left: 10px;
+      top: 15px;
+      left: 15px;
       z-index: 1001;
-      border-radius: 8px;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #hamburger-menu:hover {
+      transform: scale(1.1) rotate(90deg);
     }
 
-    /* Nav Menu (hidden by default) */
+    /* 🔹 Side Nav */
     .nav-menu {
       position: fixed;
       top: 0;
-      left: -250px; /* boye a gefe */
-      width: 220px;
+      left: -280px;
+      width: 280px;
       height: 100%;
-      background: #0066cc;
-      padding-top: 60px;
+      background: var(--dark-light);
+      padding-top: 80px;
       display: flex;
       flex-direction: column;
-      transition: left 0.3s ease-in-out;
+      transition: var(--transition);
       z-index: 1000;
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
     }
 
     .nav-menu a {
-      color: white;
-      padding: 15px;
-      text-decoration: none;
-      font-weight: bold;
-      border-bottom: 1px solid #004080;
-      transition: background 0.2s;
+      color: var(--text);
+      padding: 18px 25px;
+      font-weight: 600;
+      border-left: 4px solid transparent;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
-
+    
     .nav-menu a:hover {
-      background: #0056b3;
+      background: rgba(37, 99, 235, 0.1);
+      padding-left: 30px;
+      border-left-color: var(--primary);
+    }
+    
+    .nav-menu.active { 
+      left: 0; 
     }
 
-    .nav-menu a:last-child {
-      border-bottom: none;
+    /* 🔹 Header */
+    .header-container {
+      background: rgba(17, 24, 39, 0.9);
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    }
+    
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    nav ul li a {
+      color: var(--text);
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding: 8px 5px;
+    }
+    
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: var(--transition);
+    }
+    
+    nav ul li a:hover {
+      color: #38bdf8;
+    }
+    
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    
+    .cart-icon {
+      position: relative;
+      font-size: 24px;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--secondary);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Nuna menu idan an danna */
-    .nav-menu.active {
-      left: 0; /* fito daga hagu */
+    /* 🔹 FAQs Section */
+    .faqs {
+      padding: 80px 5%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .faqs h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .faqs h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+    
+    .faqs-intro {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .search-box {
+      max-width: 500px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 15px 20px;
+      padding-left: 50px;
+      border: none;
+      border-radius: 50px;
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text);
+      font-size: 1rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    
+    .search-box i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+    
+    .faq-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .faq-category {
+      padding: 10px 20px;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .faq-category.active, .faq-category:hover {
+      background: var(--gradient);
+      transform: translateY(-2px);
+    }
+    
+    .faq-container {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .faq-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    .faq-item {
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .faq-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .faq-question {
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.6);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    
+    .faq-question:hover {
+      background: rgba(15, 23, 42, 0.8);
+    }
+    
+    .faq-question i {
+      transition: var(--transition);
+    }
+    
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: rgba(15, 23, 42, 0.3);
+      color: var(--text-muted);
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 20px;
+    }
+    
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+    
+    .contact-support {
+      text-align: center;
+      margin-top: 50px;
+      padding: 30px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .contact-support h2 {
+      margin-bottom: 20px;
+      color: var(--primary-light);
+    }
+    
+    .contact-support p {
+      margin-bottom: 25px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .support-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    
+    .support-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 🔹 Footer */
+    footer {
+      background: linear-gradient(120deg, var(--dark), var(--dark-light));
+      color: var(--text);
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 80px;
+      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    footer p {
+      font-size: 1.1rem;
+    }
+
+    /* 🔹 Responsive Design */
+    @media (max-width: 992px) {
+      .header-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      nav ul {
+        gap: 15px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .faqs h1 {
+        font-size: 2rem;
+      }
+      
+      .faq-container {
+        padding: 20px;
+      }
+      
+      .faq-question {
+        padding: 15px;
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      nav ul {
+        justify-content: center;
+      }
+      
+      .faqs {
+        padding: 60px 15px;
+      }
+      
+      .faq-categories {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .faq-category {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title>FAQS</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="index.js" defer></script>
 </head>
 <body>
  
   <!-- 🔹 Header / Navigation -->
   <header>
-
-  <!-- Hamburger button -->
-  <div id="hamburger-menu">☰</div>
-
-    <!-- Nav menu -->
-  <div class="nav-menu" id="navMenu">
-    <a href="index.html">🏠 Home</a>
-    <a href="profile.html">🚹Profile</a>
-    <a href="delivery.html">🛳️ Delivery order</a>
-    <a href="setting.html">☸️ Setting</a>
-  </div>
+    <div id="hamburger-menu"><i class="fas fa-bars"></i></div>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery order</a>
+      <a href="setting.html"><i class="fas fa-cog"></i> Setting</a>
+    </div>
     
-
-    
-    <div class="container header-container">
-      <div class="logo" align="center">faqs</div>
+    <div class="header-container">
+      <div class="logo">Biz Group 4</div>
       <nav>
         <ul>
           <li><a href="aboutus.html">About Us</a></li>
@@ -99,54 +491,222 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <div class="cart">
-        🛒 <span id="cart-count">0</span>
+      <div>
+        <a href="checkout.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
       </div>
     </div>
   </header>
 
-
-  <!-- FAQs Section -->
+  <!-- 🔹 FAQs Section -->
   <section class="faqs">
     <h1>Frequently Asked Questions</h1>
-
-    <div class="faq-item">
-      <h3 onclick="toggleAnswer(this)">How do I place an order?</h3>
-      <p class="answer">You can browse products in our Shop, click "Add to Cart", and then proceed to Checkout.</p>
+    
+    <p class="faqs-intro">
+      Find answers to common questions about our products, services, and policies. 
+      If you can't find what you're looking for, feel free to contact our support team.
+    </p>
+    
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="faqSearch" placeholder="Search for questions..." onkeyup="searchFAQs()">
     </div>
-
-    <div class="faq-item">
-      <h3 onclick="toggleAnswer(this)">What payment methods are accepted?</h3>
-      <p class="answer">We accept credit/debit cards, PayPal, and bank transfer.</p>
+    
+    <div class="faq-categories">
+      <div class="faq-category active" data-category="all">All Questions</div>
+      <div class="faq-category" data-category="ordering">Ordering</div>
+      <div class="faq-category" data-category="shipping">Shipping & Delivery</div>
+      <div class="faq-category" data-category="returns">Returns & Refunds</div>
+      <div class="faq-category" data-category="account">Account & Payment</div>
     </div>
-
-    <div class="faq-item">
-      <h3 onclick="toggleAnswer(this)">Can I return a product?</h3>
-      <p class="answer">Yes! Returns are accepted within 14 days of purchase if the product is unused.</p>
+    
+    <div class="faq-container">
+      <div class="faq-item" data-categories="ordering">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          How do I place an order? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>You can place an order by browsing our products in the Shop section, adding items to your cart, and proceeding to checkout. You'll need to provide your shipping information and payment details to complete your order.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" data-categories="ordering,account">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          What payment methods are accepted? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We accept various payment methods including credit/debit cards (Visa, MasterCard, American Express), PayPal, and bank transfers. All payments are processed securely through encrypted channels.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" data-categories="shipping">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          How long does shipping take? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Shipping times vary depending on your location:</p>
+          <ul>
+            <li>Within the city: 1-2 business days</li>
+            <li>Domestic: 3-5 business days</li>
+            <li>International: 7-14 business days</li>
+          </ul>
+          <p>You'll receive a tracking number once your order ships.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" data-categories="returns">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          Can I return a product? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! We accept returns within 14 days of purchase if the product is unused and in its original packaging. To initiate a return, please contact our customer service team with your order number and reason for return.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" data-categories="returns">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          How long do refunds take to process? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Once we receive your returned item, refunds are processed within 3-5 business days. The time it takes for the refund to appear in your account depends on your payment method and financial institution.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" data-categories="account">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          How do I create an account? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>You can create an account by clicking on the "Profile" link in the navigation menu and selecting "Register." You'll need to provide your email address and create a password. Having an account allows you to track orders and save your preferences.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" data-categories="shipping">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          Do you offer international shipping? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we ship to most countries worldwide. International shipping rates and delivery times vary by destination. Additional customs fees or import taxes may apply depending on your country's regulations.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" data-categories="ordering">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          Can I modify or cancel my order? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>You can modify or cancel your order within 1 hour of placing it by contacting our customer service team. After this period, your order may have already entered the processing stage and cannot be changed.</p>
+        </div>
+      </div>
     </div>
-
+    
+    <div class="contact-support">
+      <h2>Still have questions?</h2>
+      <p>Can't find the answer you're looking for? Our support team is here to help you with any questions or concerns.</p>
+      <a href="contact.html" class="support-btn">Contact Support</a>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <!-- 🔹 Footer -->
   <footer>
     <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
   </footer>
-<script>
+
+  <!-- 🔹 JavaScript -->
+  <script>
+    // DOM Elements
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('navMenu');
-
-    // Toggle menu idan an danna hamburger
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
-
-    // Rufe menu idan aka danna link
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+    const cartCount = document.getElementById('cart-count');
+    const faqCategories = document.querySelectorAll('.faq-category');
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    // Initialize the page
+    function init() {
+      updateCartCount();
+      
+      // Hamburger menu functionality
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.innerHTML = navMenu.classList.contains('active') ? 
+          '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
       });
-    });
+      
+      // Close menu when clicking on links
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
+      
+      // FAQ category filtering
+      faqCategories.forEach(category => {
+        category.addEventListener('click', () => {
+          const categoryName = category.getAttribute('data-category');
+          
+          // Update active category
+          faqCategories.forEach(cat => cat.classList.remove('active'));
+          category.classList.add('active');
+          
+          // Filter FAQs
+          filterFAQs(categoryName);
+        });
+      });
+      
+      // Open first FAQ by default
+      if (faqItems.length > 0) {
+        faqItems[0].classList.add('active');
+      }
+    }
+    
+    // Update cart count
+    function updateCartCount() {
+      // In a real app, this would come from your cart system
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      cartCount.textContent = totalItems;
+    }
+    
+    // Toggle FAQ answer visibility
+    function toggleFAQ(element) {
+      const faqItem = element.parentElement;
+      faqItem.classList.toggle('active');
+    }
+    
+    // Filter FAQs by category
+    function filterFAQs(category) {
+      faqItems.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-categories').includes(category)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+          item.classList.remove('active');
+        }
+      });
+    }
+    
+    // Search FAQs
+    function searchFAQs() {
+      const searchTerm = document.getElementById('faqSearch').value.toLowerCase();
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+          item.classList.remove('active');
+        }
+      });
+    }
+    
+    // Initialize the page when loaded
+    document.addEventListener('DOMContentLoaded', init);
   </script>
-            
 </body>
 </html>
