@@ -1,95 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+  <title>Contact Us - Biz Group 4</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+    /* 🔹 General Reset & Variables */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --secondary: #10b981;
+      --accent: #8b5cf6;
+      --dark: #0f172a;
+      --dark-light: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s ease;
     }
 
-    /* Hamburger Button */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--dark-light));
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a { 
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* 🔹 Hamburger Button */
     #hamburger-menu {
-      font-size: 30px;
+      font-size: 24px;
       cursor: pointer;
-      padding: 15px;
-      background: #0066cc;
+      padding: 12px;
+      background: var(--gradient);
       color: white;
-      width: 60px;
+      width: 50px;
+      height: 50px;
       text-align: center;
       user-select: none;
       position: fixed;
-      top: 10px;
-      left: 10px;
+      top: 15px;
+      left: 15px;
       z-index: 1001;
-      border-radius: 8px;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #hamburger-menu:hover {
+      transform: scale(1.1) rotate(90deg);
     }
 
-    /* Nav Menu (hidden by default) */
+    /* 🔹 Side Nav */
     .nav-menu {
       position: fixed;
       top: 0;
-      left: -250px; /* boye a gefe */
-      width: 220px;
+      left: -280px;
+      width: 280px;
       height: 100%;
-      background: #0066cc;
-      padding-top: 60px;
+      background: var(--dark-light);
+      padding-top: 80px;
       display: flex;
       flex-direction: column;
-      transition: left 0.3s ease-in-out;
+      transition: var(--transition);
       z-index: 1000;
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
     }
 
     .nav-menu a {
+      color: var(--text);
+      padding: 18px 25px;
+      font-weight: 600;
+      border-left: 4px solid transparent;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .nav-menu a:hover {
+      background: rgba(37, 99, 235, 0.1);
+      padding-left: 30px;
+      border-left-color: var(--primary);
+    }
+    
+    .nav-menu.active { 
+      left: 0; 
+    }
+
+    /* 🔹 Header */
+    .header-container {
+      background: rgba(17, 24, 39, 0.9);
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    }
+    
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    nav ul li a {
+      color: var(--text);
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding: 8px 5px;
+    }
+    
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: var(--transition);
+    }
+    
+    nav ul li a:hover {
+      color: #38bdf8;
+    }
+    
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    
+    .cart-icon {
+      position: relative;
+      font-size: 24px;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--secondary);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 🔹 Contact Section */
+    .contact {
+      padding: 80px 5%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .contact h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .contact h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    @media (max-width: 768px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .contact-form, .contact-info {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-form::before, .contact-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    .contact-form h2, .contact-info h2 {
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      color: var(--primary-light);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text);
+      font-size: 16px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+    }
+    
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 15px;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      margin-top: 10px;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: var(--primary-dark);
+      transition: var(--transition);
+      z-index: -1;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    
+    .btn:hover::before {
+      width: 100%;
+    }
+    
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+    }
+    
+    .contact-info-icon {
+      font-size: 24px;
+      color: var(--primary-light);
+      margin-right: 15px;
+      min-width: 30px;
+      text-align: center;
+    }
+    
+    .contact-info-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      color: var(--primary-light);
+    }
+    
+    .contact-info-content p {
+      color: var(--text-muted);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50%;
+      font-size: 18px;
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    }
+    
+    /* Map Section */
+    .map-container {
+      margin-top: 50px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 350px;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Success Message */
+    .success-message {
+      display: none;
+      background: var(--secondary);
       color: white;
       padding: 15px;
-      text-decoration: none;
-      font-weight: bold;
-      border-bottom: 1px solid #004080;
-      transition: background 0.2s;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 20px;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    .nav-menu a:hover {
-      background: #0056b3;
+    /* 🔹 Footer */
+    footer {
+      background: linear-gradient(120deg, var(--dark), var(--dark-light));
+      color: var(--text);
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 80px;
+      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    footer p {
+      font-size: 1.1rem;
     }
 
-    .nav-menu a:last-child {
-      border-bottom: none;
+    /* 🔹 Responsive Design */
+    @media (max-width: 992px) {
+      .header-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      nav ul {
+        gap: 15px;
+      }
     }
-
-    /* Nuna menu idan an danna */
-    .nav-menu.active {
-      left: 0; /* fito daga hagu */
+    
+    @media (max-width: 768px) {
+      .contact h1 {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      nav ul {
+        justify-content: center;
+      }
+      
+      .contact {
+        padding: 60px 15px;
+      }
+      
+      .contact-form, .contact-info {
+        padding: 20px;
+      }
+      
+      .contact-info-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .contact-info-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      
+      .social-links {
+        justify-content: center;
+      }
     }
   </style>
-
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title> contact us</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="index.js" defer></script>
 </head>
 <body>
  
   <!-- 🔹 Header / Navigation -->
   <header>
-
-<!-- Hamburger button -->
-  <div id="hamburger-menu">☰</div>
-
-    <!-- Nav menu -->
-  <div class="nav-menu" id="navMenu">
-    <a href="index.html">🏠 Home</a>
-    <a href="profile.html">🚹Profile</a>
-    <a href="delivery.html">🛳️ Delivery order</a>
-    <a href="setting.html">☸️ Setting</a>
-  </div>
+    <div id="hamburger-menu"><i class="fas fa-bars"></i></div>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery order</a>
+      <a href="setting.html"><i class="fas fa-cog"></i> Setting</a>
+    </div>
     
-
-  
-    <div class="container header-container">
-      <div class="logo" align="center"> contact Us</div>
+    <div class="header-container">
+      <div class="logo">Biz Group 4</div>
       <nav>
         <ul>
           <li><a href="aboutus.html">About Us</a></li>
@@ -101,45 +510,199 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <div class="cart">
-        🛒 <span id="cart-count">0</span>
+      <div>
+        <a href="checkout.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
       </div>
     </div>
   </header>
 
-
-  <!-- Contact Form Section -->
+  <!-- 🔹 Contact Section -->
   <section class="contact">
     <h1>Contact Us</h1>
-    <form onsubmit="return validateContact(event)">
-      <input type="text" id="contactName" placeholder="Your Name" required>
-      <input type="email" id="contactEmail" placeholder="Your Email" required>
-      <textarea id="contactMessage" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    
+    <div class="contact-container">
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input type="text" id="contactName" placeholder="Enter your full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" placeholder="Enter your email address" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="contactSubject">Subject</label>
+            <input type="text" id="contactSubject" placeholder="What is this regarding?" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="contactMessage">Your Message</label>
+            <textarea id="contactMessage" placeholder="How can we help you?" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+          <i class="fas fa-check-circle"></i> Thank you for your message! We'll get back to you soon.
+        </div>
+      </div>
+      
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <h2>Get In Touch</h2>
+        
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-info-content">
+            <h3>Address</h3>
+            <p>123 Business Avenue, City Center<br>Lagos, Nigeria</p>
+          </div>
+        </div>
+        
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-info-content">
+            <h3>Phone</h3>
+            <p>+234 123 456 7890<br>+234 098 765 4321</p>
+          </div>
+        </div>
+        
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-info-content">
+            <h3>Email</h3>
+            <p>info@bizgroup4.com<br>support@bizgroup4.com</p>
+          </div>
+        </div>
+        
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="contact-info-content">
+            <h3>Business Hours</h3>
+            <p>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm<br>Sunday: Closed</p>
+          </div>
+        </div>
+        
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Map Section -->
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.452650828997!2d3.379295274995318!3d6.466281993770899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2sus!4v1690900336904!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <!-- 🔹 Footer -->
   <footer>
     <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
   </footer>
 
-<script>
+  <!-- 🔹 JavaScript -->
+  <script>
+    // DOM Elements
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('navMenu');
-
-    // Toggle menu idan an danna hamburger
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
-
-    // Rufe menu idan aka danna link
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+    const cartCount = document.getElementById('cart-count');
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    
+    // Initialize the page
+    function init() {
+      updateCartCount();
+      
+      // Hamburger menu functionality
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.innerHTML = navMenu.classList.contains('active') ? 
+          '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
       });
-    });
+      
+      // Close menu when clicking on links
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
+      
+      // Form submission
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (validateContactForm()) {
+          sendContactMessage();
+        }
+      });
+    }
+    
+    // Update cart count
+    function updateCartCount() {
+      // In a real app, this would come from your cart system
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      cartCount.textContent = totalItems;
+    }
+    
+    // Validate contact form
+    function validateContactForm() {
+      const email = document.getElementById('contactEmail').value;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        return false;
+      }
+      
+      return true;
+    }
+    
+    // Send contact message
+    function sendContactMessage() {
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value;
+      
+      // In a real app, you would send this data to your server
+      console.log('Contact form submitted:', { name, email, subject, message });
+      
+      // Show success message
+      successMessage.style.display = 'block';
+      
+      // Reset form
+      contactForm.reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 5000);
+    }
+    
+    // Initialize the page when loaded
+    document.addEventListener('DOMContentLoaded', init);
   </script>
-                
 </body>
 </html>
