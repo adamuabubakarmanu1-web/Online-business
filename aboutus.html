@@ -2,214 +2,705 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title>About Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Biz Group 4</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+    /* 🔹 General Reset & Variables */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --secondary: #10b981;
+      --accent: #8b5cf6;
+      --dark: #0f172a;
+      --dark-light: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s ease;
     }
 
-    /* Hamburger Button */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--dark-light));
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a { 
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* 🔹 Hamburger Button */
     #hamburger-menu {
-      font-size: 30px;
+      font-size: 24px;
       cursor: pointer;
-      padding: 15px;
-      background: #0066cc;
+      padding: 12px;
+      background: var(--gradient);
       color: white;
-      width: 60px;
+      width: 50px;
+      height: 50px;
       text-align: center;
       user-select: none;
       position: fixed;
-      top: 10px;
-      left: 10px;
+      top: 15px;
+      left: 15px;
       z-index: 1001;
-      border-radius: 8px;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #hamburger-menu:hover {
+      transform: scale(1.1) rotate(90deg);
     }
 
-    /* Nav Menu */
+    /* 🔹 Side Nav */
     .nav-menu {
       position: fixed;
       top: 0;
-      left: -250px;
-      width: 220px;
+      left: -280px;
+      width: 280px;
       height: 100%;
-      background: #0066cc;
-      padding-top: 60px;
+      background: var(--dark-light);
+      padding-top: 80px;
       display: flex;
       flex-direction: column;
-      transition: left 0.3s ease-in-out;
+      transition: var(--transition);
       z-index: 1000;
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
     }
 
     .nav-menu a {
-      color: white;
-      padding: 15px;
-      text-decoration: none;
-      font-weight: bold;
-      border-bottom: 1px solid #004080;
+      color: var(--text);
+      padding: 18px 25px;
+      font-weight: 600;
+      border-left: 4px solid transparent;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
-
+    
     .nav-menu a:hover {
-      background: #0056b3;
+      background: rgba(37, 99, 235, 0.1);
+      padding-left: 30px;
+      border-left-color: var(--primary);
+    }
+    
+    .nav-menu.active { 
+      left: 0; 
     }
 
-    .nav-menu.active {
-      left: 0;
+    /* 🔹 Header */
+    .header-container {
+      background: rgba(17, 24, 39, 0.9);
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-
-    /* Header */
-    header {
-      background: #004080;
-      color: white;
-      padding: 15px;
-      text-align: center;
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
     }
-    header .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    header nav ul {
+    
+    nav ul {
       list-style: none;
-      margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
       gap: 20px;
     }
-    header nav ul li {
-      display: inline;
+    
+    nav ul li a {
+      color: var(--text);
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding: 8px 5px;
     }
-    header nav ul li a {
+    
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: var(--transition);
+    }
+    
+    nav ul li a:hover {
+      color: #38bdf8;
+    }
+    
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    
+    .cart-icon {
+      position: relative;
+      font-size: 24px;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--secondary);
       color: white;
-      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* About Section */
+    /* 🔹 About Section */
     .about {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 80px 5%;
+      max-width: 1000px;
+      margin: 0 auto;
     }
+    
     .about h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
       text-align: center;
-      margin-bottom: 25px;
-      color: #007bff;
-    }
-    .about h2 {
-      margin: 20px 0 10px;
-      color: #333;
-    }
-    .about p {
-      margin-bottom: 15px;
-      line-height: 1.6;
-      color: #555;
-      text-align: justify;
-    }
-
-    /* Team Section */
-    .team {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .team h2 {
-      color: #007bff;
-      margin-bottom: 20px;
-    }
-    .member {
+      position: relative;
       display: inline-block;
-      margin: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .about h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+    
+    .about-content {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    
+    .about-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    .about p {
+      margin-bottom: 20px;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    
+    .mission-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .mission-vision {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .mission, .vision {
+      background: rgba(15, 23, 42, 0.6);
+      padding: 25px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .mission h2, .vision h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* 🔹 Team Section */
+    .team {
+      padding: 40px 5%;
       text-align: center;
     }
-    .member img {
+    
+    .team h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .team h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+    
+    .toggle-team-btn {
+      padding: 12px 25px;
+      border: none;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transition);
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+    
+    .toggle-team-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .member {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    .member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .member-img {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 10px;
+      margin: 0 auto 20px;
+      border: 4px solid var(--primary);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .member h3 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: var(--primary-light);
+    }
+    
+    .member-role {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .member-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    
+    .member-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .member-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50%;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+    
+    .member-social a:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    }
+    
+    /* Values Section */
+    .values {
+      padding: 60px 5%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .values h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .values h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    
+    .value-item {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .value-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .value-icon {
+      font-size: 40px;
+      color: var(--primary-light);
+      margin-bottom: 20px;
+    }
+    
+    .value-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--primary-light);
+    }
+    
+    .value-item p {
+      color: var(--text-muted);
     }
 
-    /* Footer */
+    /* 🔹 Footer */
     footer {
-      background: #004080;
-      color: white;
+      background: linear-gradient(120deg, var(--dark), var(--dark-light));
+      color: var(--text);
       text-align: center;
-      padding: 15px;
-      margin-top: 20px;
+      padding: 30px 20px;
+      margin-top: 80px;
+      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    footer p {
+      font-size: 1.1rem;
+    }
+
+    /* 🔹 Responsive Design */
+    @media (max-width: 992px) {
+      .header-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      nav ul {
+        gap: 15px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .about h1, .team h2, .values h2 {
+        font-size: 1.8rem;
+      }
+      
+      .about-content {
+        padding: 25px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      nav ul {
+        justify-content: center;
+      }
+      
+      .about, .team, .values {
+        padding: 40px 15px;
+      }
+    }
+    
+    /* Animation for team section */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .team-grid {
+      animation: fadeIn 0.5s ease-out;
     }
   </style>
 </head>
 <body>
-
-  <!-- 🔹 Hamburger button -->
-  <div id="hamburger-menu">☰</div>
-
-  <!-- 🔹 Side Nav -->
-  <div class="nav-menu" id="navMenu">
-    <a href="index.html">🏠 Home</a>
-    <a href="profile.html">🚹 Profile</a>
-    <a href="delivery.html">🛳️ Delivery order</a>
-    <a href="setting.html">☸️ Setting</a>
-  </div>
-
-  <!-- 🔹 Header -->
+ 
+  <!-- 🔹 Header / Navigation -->
   <header>
-    <div class="logo">About Us</div>
-    <nav>
-      <ul>
-        <li><a href="aboutus.html">About Us</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="offers.html">Special Offers</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="faqs.html">FAQs</a></li>
-        <li><a href="checkout.html">Checkout</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+    <div id="hamburger-menu"><i class="fas fa-bars"></i></div>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery order</a>
+      <a href="setting.html"><i class="fas fa-cog"></i> Setting</a>
+    </div>
+    
+    <div class="header-container">
+      <div class="logo">Biz Group 4</div>
+      <nav>
+        <ul>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="offers.html">Special Offers</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <a href="checkout.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
   </header>
 
   <!-- 🔹 About Section -->
   <section class="about">
     <h1>About Biz Group 4</h1>
-    <p>
-      Biz Group 4 is a student project e-commerce website created to showcase and sell
-      amazing products online. Our mission is to learn and apply web technologies in
-      real-world applications.
-    </p>
-    <h2>Our Mission</h2>
-    <p>To provide quality products and seamless shopping experience.</p>
-    <h2>Our Vision</h2>
-    <p>To become a leading student-driven online marketplace.</p>
+    
+    <div class="about-content">
+      <p>
+        Biz Group 4 is a student project e-commerce website created to showcase and sell
+        amazing products online. Our mission is to learn and apply web technologies in
+        real-world applications while providing a seamless shopping experience for our customers.
+      </p>
+      
+      <p>
+        We are passionate about creating innovative solutions and delivering value through
+        our platform. Our team consists of dedicated students who are committed to excellence
+        in both design and functionality.
+      </p>
+      
+      <div class="mission-vision">
+        <div class="mission">
+          <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
+          <p>To provide quality products and a seamless shopping experience that exceeds customer expectations while serving as a learning platform for web development.</p>
+        </div>
+        
+        <div class="vision">
+          <h2><i class="fas fa-eye"></i> Our Vision</h2>
+          <p>To become a leading student-driven online marketplace that bridges the gap between academic learning and real-world e-commerce applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔹 Values Section -->
+  <section class="values">
+    <h2>Our Values</h2>
+    
+    <div class="values-grid">
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Learning</h3>
+        <p>We prioritize education and skill development through hands-on experience with modern web technologies.</p>
+      </div>
+      
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Collaboration</h3>
+        <p>We believe in the power of teamwork and collaborative problem-solving to create exceptional results.</p>
+      </div>
+      
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3>Innovation</h3>
+        <p>We embrace creative thinking and innovative approaches to overcome challenges and improve our platform.</p>
+      </div>
+      
+      <div class="value-item">
+        <div class="value-icon">
+          <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <h3>Customer Focus</h3>
+        <p>We are committed to providing an exceptional user experience and value for our customers.</p>
+      </div>
+    </div>
   </section>
 
   <!-- 🔹 Team Section -->
   <section class="team">
     <h2>Meet Our Team</h2>
-    <button onclick="toggleTeam()">Show/Hide Team</button>
+    
+    <button class="toggle-team-btn" onclick="toggleTeam()">
+      <i class="fas fa-users"></i> Show Our Team
+    </button>
+    
     <div id="team" style="display: none;">
-      <div class="member">
-        <img src="FB_IMG_17554287061601160.jpg.jpg" alt="Member 1">
-        <h3>Adamu Abubakar</h3>
-        <p>Team Leader</p>
-      </div>
-      <div class="member">
-        <img src="images/member2.jpg" alt="Member 2">
-        <h3>Aisha Bello</h3>
-        <p>Frontend Developer</p>
-      </div>
-      <div class="member">
-        <img src="images/member3.jpg" alt="Member 3">
-        <h3>Umar Musa</h3>
-        <p>Backend Developer</p>
+      <div class="team-grid">
+        <div class="member">
+          <img src="FB_IMG_17554287061601160.jpg" alt="Adamu Abubakar" class="member-img">
+          <h3>Adamu Abubakar</h3>
+          <div class="member-role">Team Leader</div>
+          <p class="member-desc">Oversees project direction and coordinates team efforts to ensure successful delivery.</p>
+          <div class="member-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        
+        <div class="member">
+          <img src="https://via.placeholder.com/150" alt="Aisha Bello" class="member-img">
+          <h3>Aisha Bello</h3>
+          <div class="member-role">Frontend Developer</div>
+          <p class="member-desc">Creates engaging user interfaces with a focus on responsive design and user experience.</p>
+          <div class="member-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        
+        <div class="member">
+          <img src="https://via.placeholder.com/150" alt="Umar Musa" class="member-img">
+          <h3>Umar Musa</h3>
+          <div class="member-role">Backend Developer</div>
+          <p class="member-desc">Develops server-side functionality and ensures smooth operation of the e-commerce platform.</p>
+          <div class="member-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        
+        <div class="member">
+          <img src="https://via.placeholder.com/150" alt="Fatima Ahmed" class="member-img">
+          <h3>Fatima Ahmed</h3>
+          <div class="member-role">UI/UX Designer</div>
+          <p class="member-desc">Designs intuitive user interfaces and ensures a seamless user experience across the platform.</p>
+          <div class="member-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -219,22 +710,56 @@
     <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
   </footer>
 
+  <!-- 🔹 JavaScript -->
   <script>
+    // DOM Elements
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+    const cartCount = document.getElementById('cart-count');
+    const teamSection = document.getElementById('team');
+    const toggleButton = document.querySelector('.toggle-team-btn');
+    
+    // Initialize the page
+    function init() {
+      updateCartCount();
+      
+      // Hamburger menu functionality
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.innerHTML = navMenu.classList.contains('active') ? 
+          '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
       });
-    });
-    function toggleTeam() {
-      const team = document.getElementById('team');
-      team.style.display = (team.style.display === "none") ? "block" : "none";
+      
+      // Close menu when clicking on links
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
     }
+    
+    // Update cart count
+    function updateCartCount() {
+      // In a real app, this would come from your cart system
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      cartCount.textContent = totalItems;
+    }
+    
+    // Toggle team visibility
+    function toggleTeam() {
+      if (teamSection.style.display === "none") {
+        teamSection.style.display = "block";
+        toggleButton.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Our Team';
+      } else {
+        teamSection.style.display = "none";
+        toggleButton.innerHTML = '<i class="fas fa-users"></i> Show Our Team';
+      }
+    }
+    
+    // Initialize the page when loaded
+    document.addEventListener('DOMContentLoaded', init);
   </script>
-
 </body>
-</html>
+</html>. my
