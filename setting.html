@@ -3,238 +3,638 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title>Biz Group 4 - Settings</title>
-
+  <title>Settings - StyleShop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
+    /* Global Styles */
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+      --accent: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4cc9f0;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --danger: #e63946;
+    }
+    
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f7fb;
-      color: #333;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    /* Hamburger */
-    #hamburger-menu {
-      font-size: 30px;
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #f9fafb;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    button {
       cursor: pointer;
-      padding: 15px;
-      background: #0066cc;
-      color: white;
-      width: 60px;
-      text-align: center;
-      user-select: none;
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 1001;
-      border-radius: 8px;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin: 0 12px;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    nav ul li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .cart {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      position: relative;
+      padding: 8px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    
+    .cart:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    #cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--accent);
+      color: white;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Hamburger Menu */
+    #hamburger-menu {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      background: var(--secondary);
+      color: white;
+      border-radius: 4px;
+    }
+    
     .nav-menu {
       position: fixed;
       top: 0;
       left: -250px;
       width: 220px;
       height: 100%;
-      background: #0066cc;
+      background: var(--secondary);
       padding-top: 60px;
       display: flex;
       flex-direction: column;
       transition: left 0.3s ease-in-out;
       z-index: 1000;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
     }
+    
     .nav-menu a {
       color: white;
-      padding: 15px;
+      padding: 15px 20px;
       text-decoration: none;
-      font-weight: bold;
-      border-bottom: 1px solid #004080;
-    }
-    .nav-menu a:hover { background: #0056b3; }
-    .nav-menu.active { left: 0; }
-
-    /* Header */
-    header {
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 15px 0;
-      margin-left: 80px;
-      position: sticky;
-      top: 0;
-      z-index: 500;
-    }
-    .header-container {
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background 0.2s;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      max-width: 1000px;
-      margin: auto;
-      padding: 0 20px;
     }
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #0066cc;
+    
+    .nav-menu a i {
+      margin-right: 10px;
     }
-    nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
-    nav ul li { margin: 0 10px; }
-    nav ul li a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #333;
+    
+    .nav-menu a:hover {
+      background: var(--primary);
     }
-    nav ul li a:hover { color: #0066cc; }
-
-    /* Settings */
-    .settings-container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    
+    .nav-menu.active {
+      left: 0;
     }
-    .settings-container h2 {
+    
+    /* Overlay for closing menu */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      display: block;
+    }
+    
+    /* Settings Section */
+    .settings-section {
+      padding: 40px 0;
+    }
+    
+    .settings-header {
       text-align: center;
-      color: #0066cc;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
     }
-
-    .profile-pic {
+    
+    .settings-header h1 {
+      font-size: 32px;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    
+    .settings-header p {
+      color: var(--gray);
+      font-size: 18px;
+    }
+    
+    .settings-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .settings-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .settings-card h2 {
+      font-size: 24px;
+      color: var(--primary);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
       display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
+      align-items: center;
     }
-    .profile-pic img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #0066cc;
+    
+    .settings-card h2 i {
+      margin-right: 10px;
     }
+    
     .form-group {
       margin-bottom: 20px;
     }
+    
     .form-group label {
       display: block;
-      font-weight: bold;
+      font-weight: 600;
+      color: var(--dark);
       margin-bottom: 8px;
     }
-    .form-group input {
+    
+    .form-group input,
+    .form-group select {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-    .btn {
-      display: inline-block;
-      background: #0066cc;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      padding: 12px 15px;
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      font-family: inherit;
       font-size: 16px;
-      transition: 0.3s;
     }
-    .btn:hover { background: #004c99; }
-
+    
+    .profile-image-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 25px;
+    }
+    
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .change-image-btn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: var(--primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s;
+    }
+    
+    .change-image-btn:hover {
+      background: var(--secondary);
+    }
+    
+    .settings-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+    }
+    
+    .btn-primary:hover {
+      background: var(--secondary);
+    }
+    
     .btn-danger {
-      background: #e63946;
+      background: var(--danger);
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
     }
+    
     .btn-danger:hover {
       background: #c62828;
     }
-
+    
+    .btn-secondary {
+      background: var(--light-gray);
+      color: var(--dark);
+      padding: 12px 25px;
+      font-size: 16px;
+    }
+    
+    .btn-secondary:hover {
+      background: #dcdcdc;
+    }
+    
+    /* Notification Toggle */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(30px);
+    }
+    
+    .toggle-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--light);
+    }
+    
+    .toggle-label {
+      font-weight: 500;
+    }
+    
+    /* Footer */
     footer {
-      background: #333;
+      background: var(--dark);
       color: white;
       text-align: center;
-      padding: 15px;
-      margin-top: 50px;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      nav ul {
+        display: none;
+      }
+      
+      #hamburger-menu {
+        display: block;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .settings-actions {
+        flex-direction: column;
+      }
+      
+      .settings-card {
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .logo {
+        font-size: 22px;
+      }
+      
+      .settings-header h1 {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- 🔹 Header -->
+  <!-- Overlay for closing menu -->
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Header / Navigation -->
   <header>
-    <div id="hamburger-menu">☰</div>
-
-    <div class="nav-menu" id="navMenu">
-      <a href="index.html">🏠 Home</a>
-      <a href="profile.html">🚹 Profile</a>
-      <a href="delivery.html">🛳️ Delivery order</a>
-      <a href="setting.html">☸️ Setting</a>
-    </div>
-
     <div class="container header-container">
-      <div class="logo">Biz Group 4</div>
+      <div id="hamburger-menu">☰</div>
+      <div class="logo">StyleShop</div>
       <nav>
         <ul>
           <li><a href="aboutus.html">About Us</a></li>
           <li><a href="shop.html">Shop</a></li>
           <li><a href="offers.html">Special Offers</a></li>
-          <li><a href="Mreviews.html">Reviews</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
           <li><a href="faqs.html">FAQs</a></li>
           <li><a href="checkout.html">Checkout</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <div>
-        <a href="checkout.html"><h3>🛒 Cart (<span id="cart-count">0</span>)</h3></a>
-      </div>
+      <a href="checkout.html" class="cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
     </div>
   </header>
 
-  <!-- 🔹 Settings -->
-  <main>
+  <!-- Nav menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery Order</a>
+    <a href="setting.html"><i class="fas fa-cog"></i> Settings</a>
+  </div>
+
+  <!-- Settings Section -->
+  <section class="settings-section container">
+    <div class="settings-header">
+      <h1>Account Settings</h1>
+      <p>Manage your account preferences and settings</p>
+    </div>
+    
     <div class="settings-container">
-      <h2>⚙️ Settings</h2>
-
-      <!-- Profile Picture -->
-      <div class="profile-pic">
-        <img id="profileImage" src="default-profile.png" alt="Profile">
+      <!-- Profile Settings -->
+      <div class="settings-card">
+        <h2><i class="fas fa-user"></i> Profile Settings</h2>
+        
+        <div class="profile-image-container">
+          <img id="profileImage" src="https://via.placeholder.com/150/4361ee/ffffff?text=User" alt="Profile" class="profile-image">
+          <div class="change-image-btn" id="changePhotoBtn">
+            <i class="fas fa-camera"></i>
+          </div>
+          <input type="file" id="profilePicUpload" style="display:none" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter your username">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number">
+        </div>
       </div>
-      <div class="form-group">
-        <label for="profilePicUpload">Change Profile Picture:</label>
-        <input type="file" id="profilePicUpload" accept="image/*">
+      
+      <!-- Notification Settings -->
+      <div class="settings-card">
+        <h2><i class="fas fa-bell"></i> Notification Settings</h2>
+        
+        <div class="toggle-container">
+          <span class="toggle-label">Email Notifications</span>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="toggle-container">
+          <span class="toggle-label">SMS Notifications</span>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="toggle-container">
+          <span class="toggle-label">Promotional Offers</span>
+          <span class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </span>
+        </div>
+        
+        <div class="toggle-container">
+          <span class="toggle-label">Order Updates</span>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
       </div>
-
-      <!-- Username -->
-      <div class="form-group">
-        <label for="username">Change Username:</label>
-        <input type="text" id="username" placeholder="Enter new name">
+      
+      <!-- Privacy & Security -->
+      <div class="settings-card">
+        <h2><i class="fas fa-shield-alt"></i> Privacy & Security</h2>
+        
+        <div class="form-group">
+          <label for="currentPassword">Current Password</label>
+          <input type="password" id="currentPassword" placeholder="Enter current password">
+        </div>
+        
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword" placeholder="Enter new password">
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+          <input type="password" id="confirmPassword" placeholder="Confirm new password">
+        </div>
       </div>
-
-      <!-- Save Button -->
-      <button class="btn" onclick="saveSettings()">💾 Save Changes</button>
-      <button class="btn btn-danger" onclick="logout()">🚪 Logout</button>
+      
+      <!-- Actions -->
+      <div class="settings-card">
+        <h2><i class="fas fa-cog"></i> Account Actions</h2>
+        
+        <div class="settings-actions">
+          <button class="btn-primary" onclick="saveSettings()">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+          <button class="btn-secondary" onclick="resetSettings()">
+            <i class="fas fa-undo"></i> Reset
+          </button>
+          <button class="btn-danger" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
     </div>
-  </main>
+  </section>
 
-  <!-- 🔹 Footer -->
+  <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
-    </div>
+    <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
   </footer>
 
-  <!-- 🔹 JS -->
   <script>
+    // Hamburger menu functionality
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
-
-    // Load data
+    const overlay = document.getElementById('overlay');
+    
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on links
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+      });
+    });
+    
+    // Close menu when clicking outside
+    overlay.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    
+    // Load user data
     let userData = JSON.parse(localStorage.getItem("userData")) || {
       name: "Guest User",
-      image: "default-profile.png"
+      email: "guest@example.com",
+      phone: "+1 (555) 123-4567",
+      image: "https://via.placeholder.com/150/4361ee/ffffff?text=User"
     };
-
-    document.getElementById("username").value = userData.name;
-    document.getElementById("profileImage").src = userData.image;
-
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load user data
+      document.getElementById("username").value = userData.name;
+      document.getElementById("email").value = userData.email;
+      document.getElementById("phone").value = userData.phone;
+      document.getElementById("profileImage").src = userData.image;
+      
+      // Update cart count
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = 
+        cart.reduce((total, item) => total + item.quantity, 0);
+    });
+    
     // Upload Image
     document.getElementById("profilePicUpload").addEventListener("change", function(event){
       const file = event.target.files[0];
@@ -247,25 +647,57 @@
         reader.readAsDataURL(file);
       }
     });
-
+    
+    // Change profile photo
+    const changePhotoBtn = document.getElementById('changePhotoBtn');
+    changePhotoBtn.addEventListener('click', () => document.getElementById('profilePicUpload').click());
+    
     // Save Settings
     function saveSettings() {
       const newName = document.getElementById("username").value.trim();
-      if(newName) {
-        userData.name = newName;
-      }
+      const newEmail = document.getElementById("email").value.trim();
+      const newPhone = document.getElementById("phone").value.trim();
+      
+      if (newName) userData.name = newName;
+      if (newEmail) userData.email = newEmail;
+      if (newPhone) userData.phone = newPhone;
+      
       localStorage.setItem("userData", JSON.stringify(userData));
+      
       alert("✅ Settings saved successfully!");
     }
-
+    
+    // Reset Settings
+    function resetSettings() {
+      if (confirm("Are you sure you want to reset all settings to default?")) {
+        document.getElementById("username").value = "Guest User";
+        document.getElementById("email").value = "guest@example.com";
+        document.getElementById("phone").value = "+1 (555) 123-4567";
+        document.getElementById("currentPassword").value = "";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmPassword").value = "";
+        
+        // Reset toggles
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+          checkbox.checked = false;
+        });
+        
+        // Enable some toggles by default
+        document.querySelectorAll('input[type="checkbox"]')[0].checked = true;
+        document.querySelectorAll('input[type="checkbox"]')[2].checked = true;
+        document.querySelectorAll('input[type="checkbox"]')[3].checked = true;
+        
+        alert("Settings have been reset to default values.");
+      }
+    }
+    
     // Logout
     function logout() {
       if(confirm("Are you sure you want to logout?")) {
         localStorage.removeItem("userData");
-        location.reload();
+        window.location.href = "index.html";
       }
     }
   </script>
-
 </body>
 </html>
