@@ -702,215 +702,219 @@
   </footer>
 
   <!-- 🔹 JavaScript -->
+     
   <script>
-    // DOM Elements
-    const hamburger = document.getElementById('hamburger-menu');
-    const navMenu = document.getElementById('navMenu');
-    const cartCount = document.getElementById('cart-count');
-    const ordersList = document.getElementById('ordersList');
-    const filterButtons = document.querySelectorAll('.filter-btn');
+  // DOM Elements
+  const hamburger = document.getElementById('hamburger-menu');
+  const navMenu = document.getElementById('navMenu');
+  const cartCount = document.getElementById('cart-count');
+  const ordersList = document.getElementById('ordersList');
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  
+  // Initialize the page
+  function init() {
+    updateCartCount();
+    loadOrders();
     
-    // Initialize the page
-    function init() {
-      updateCartCount();
-      loadOrders();
-      
-      // Hamburger menu functionality
-      hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.innerHTML = navMenu.classList.contains('active') ? 
-          '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    // Hamburger menu functionality
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.innerHTML = navMenu.classList.contains('active') ? 
+        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close menu when clicking on links
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
       });
-      
-      // Close menu when clicking on links
-      document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('active');
-          hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-        });
+    });
+    
+    // Filter buttons functionality
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Filter orders
+        filterOrders(filter);
       });
-      
-      // Filter buttons functionality
-      filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const filter = button.getAttribute('data-filter');
-          
-          // Update active button
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-          
-          // Filter orders
-          filterOrders(filter);
-        });
-      });
-    }
+    });
+  }
+  
+  // Update cart count
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+    cartCount.textContent = totalItems;
+  }
+  
+  // Load orders from localStorage
+  function loadOrders() {
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
     
-    // Update cart count
-    function updateCartCount() {
-      // In a real app, this would come from your cart system
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
-      cartCount.textContent = totalItems;
-    }
-    
-    // Load orders from localStorage
-    function loadOrders() {
-      // Get orders from localStorage or use sample data if none exists
-      let orders = JSON.parse(localStorage.getItem('orders')) || [];
-      
-      // If no orders, check for checkout data
-      if (orders.length === 0) {
-        const checkoutData = JSON.parse(localStorage.getItem('checkoutData'));
-        if (checkoutData) {
-          // Create a sample order from checkout data
-          orders = [{
-            id: 'BG4-' + Math.floor(10000 + Math.random() * 90000),
-            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-            items: [
-              { 
-                name: 'Sample Product', 
-                price: 29.99, 
-                quantity: 1, 
-                image: 'https://via.placeholder.com/80' 
-              }
-            ],
-            status: 'pending',
-            address: checkoutData.address || '123 Sample Street, Sample City',
-            total: checkoutData.total || 29.99
-          }];
-          localStorage.setItem('orders', JSON.stringify(orders));
-        }
-      }
-      
-      renderOrders(orders);
-    }
-    
-    // Render orders to the page
-    function renderOrders(orders) {
-      ordersList.innerHTML = '';
-      
-      if (orders.length === 0) {
-        ordersList.innerHTML = `
-          <div class="no-orders">
-            <i class="fas fa-box-open"></i>
-            <p>You don't have any orders yet.</p>
-            <a href="shop.html" class="shop-btn">Start Shopping</a>
-          </div>
-        `;
-        return;
-      }
-      
-      orders.forEach(order => {
-        const orderElement = document.createElement('div');
-        orderElement.className = 'order';
-        
-        // Create progress bar based on status
-        let progressWidth = '0%';
-        let steps = [];
-        
-        if (order.status === 'pending') {
-          progressWidth = '33%';
-          steps = ['active', '', ''];
-        } else if (order.status === 'shipped') {
-          progressWidth = '66%';
-          steps = ['completed', 'active', ''];
-        } else if (order.status === 'delivered') {
-          progressWidth = '100%';
-          steps = ['completed', 'completed', 'active'];
-        }
-        
-        orderElement.innerHTML = `
-          <div class="order-header">
-            <div>
-              <div class="order-id">Order #${order.id}</div>
-              <div class="order-date">Placed on ${order.date}</div>
-            </div>
-            <div class="order-status status-${order.status}">${order.status.toUpperCase()}</div>
-          </div>
-          
-          ${order.items.map(item => `
-            <div class="order-details">
-              <img src="${item.image}" alt="${item.name}" class="order-image">
-              <div class="order-info">
-                <h3>${item.name}</h3>
-                <p>Quantity: ${item.quantity}</p>
-                <p class="order-price">$${item.price.toFixed(2)} each</p>
-              </div>
-            </div>
-          `).join('')}
-          
-          <div class="order-address">
-            <h4><i class="fas fa-map-marker-alt"></i> Delivery Address</h4>
-            <p>${order.address}</p>
-          </div>
-          
-          <div class="delivery-progress">
-            <h4><i class="fas fa-truck"></i> Delivery Progress</h4>
-            <div class="progress-steps">
-              <div class="progress-bar" style="width: ${progressWidth}"></div>
-              <div class="step ${steps[0]}">
-                <div class="step-icon"><i class="fas fa-shopping-cart"></i></div>
-                <div class="step-text">Order<br>Placed</div>
-              </div>
-              <div class="step ${steps[1]}">
-                <div class="step-icon"><i class="fas fa-shipping-fast"></i></div>
-                <div class="step-text">Shipped</div>
-              </div>
-              <div class="step ${steps[2]}">
-                <div class="step-icon"><i class="fas fa-check-circle"></i></div>
-                <div class="step-text">Delivered</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="order-actions">
-            <button class="action-btn view-btn" onclick="viewOrder('${order.id}')">
-              <i class="fas fa-eye"></i> View Details
-            </button>
-            ${order.status === 'pending' ? `
-              <button class="action-btn deliver-btn" onclick="markAsDelivered('${order.id}')">
-                <i class="fas fa-check"></i> Mark as Delivered
-              </button>
-            ` : ''}
-          </div>
-        `;
-        
-        ordersList.appendChild(orderElement);
-      });
-    }
-    
-    // Filter orders by status
-    function filterOrders(filter) {
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      
-      if (filter === 'all') {
-        renderOrders(orders);
-      } else {
-        const filteredOrders = orders.filter(order => order.status === filter);
-        renderOrders(filteredOrders);
-      }
-    }
-    
-    // Mark order as delivered
-    function markAsDelivered(orderId) {
-      let orders = JSON.parse(localStorage.getItem('orders')) || [];
-      const orderIndex = orders.findIndex(order => order.id === orderId);
-      
-      if (orderIndex !== -1) {
-        orders[orderIndex].status = 'delivered';
+    // If no orders, check for checkout data
+    const checkoutData = JSON.parse(localStorage.getItem('checkoutData'));
+    if (checkoutData) {
+      const newOrder = {
+        id: 'BG4-' + Math.floor(10000 + Math.random() * 90000),
+        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+        items: checkoutData.items || [
+          { 
+            name: 'Sample Product', 
+            price: 29.99, 
+            quantity: 1, 
+            image: 'https://via.placeholder.com/80' 
+          }
+        ],
+        status: 'pending',
+        address: checkoutData.address || '123 Sample Street, Sample City',
+        total: checkoutData.total || 29.99
+      };
+
+      // Add only if this order is not already in orders
+      const exists = orders.some(o => o.id === newOrder.id);
+      if (!exists) {
+        orders.push(newOrder);
         localStorage.setItem('orders', JSON.stringify(orders));
-        loadOrders(); // Reload orders to update the view
       }
+
+      // Clear checkoutData after saving into orders
+      localStorage.removeItem('checkoutData');
     }
     
-    // View order details
-    function viewOrder(orderId) {
-      alert(`Viewing details for order ${orderId}`);
-      // In a real app, this would navigate to an order details page
+    renderOrders(orders);
+  }
+  
+  // Render orders to the page
+  function renderOrders(orders) {
+    ordersList.innerHTML = '';
+    
+    if (orders.length === 0) {
+      ordersList.innerHTML = `
+        <div class="no-orders">
+          <i class="fas fa-box-open"></i>
+          <p>You don't have any orders yet.</p>
+          <a href="shop.html" class="shop-btn">Start Shopping</a>
+        </div>
+      `;
+      return;
     }
     
-    // Initialize the page when loaded
-    document.addEventListener('DOMContentLoaded', init);
-  </script>
+    orders.forEach(order => {
+      const orderElement = document.createElement('div');
+      orderElement.className = 'order';
+      
+      // Progress bar
+      let progressWidth = '0%';
+      let steps = [];
+      if (order.status === 'pending') {
+        progressWidth = '33%';
+        steps = ['active', '', ''];
+      } else if (order.status === 'shipped') {
+        progressWidth = '66%';
+        steps = ['completed', 'active', ''];
+      } else if (order.status === 'delivered') {
+        progressWidth = '100%';
+        steps = ['completed', 'completed', 'active'];
+      }
+      
+      orderElement.innerHTML = `
+        <div class="order-header">
+          <div>
+            <div class="order-id">Order #${order.id}</div>
+            <div class="order-date">Placed on ${order.date}</div>
+          </div>
+          <div class="order-status status-${order.status}">${order.status.toUpperCase()}</div>
+        </div>
+        
+        ${order.items.map(item => `
+          <div class="order-details">
+            <img src="${item.image}" alt="${item.name}" class="order-image">
+            <div class="order-info">
+              <h3>${item.name}</h3>
+              <p>Quantity: ${item.quantity}</p>
+              <p class="order-price">$${item.price.toFixed(2)} each</p>
+            </div>
+          </div>
+        `).join('')}
+        
+        <div class="order-address">
+          <h4><i class="fas fa-map-marker-alt"></i> Delivery Address</h4>
+          <p>${order.address}</p>
+        </div>
+        
+        <div class="delivery-progress">
+          <h4><i class="fas fa-truck"></i> Delivery Progress</h4>
+          <div class="progress-steps">
+            <div class="progress-bar" style="width: ${progressWidth}"></div>
+            <div class="step ${steps[0]}">
+              <div class="step-icon"><i class="fas fa-shopping-cart"></i></div>
+              <div class="step-text">Order<br>Placed</div>
+            </div>
+            <div class="step ${steps[1]}">
+              <div class="step-icon"><i class="fas fa-shipping-fast"></i></div>
+              <div class="step-text">Shipped</div>
+            </div>
+            <div class="step ${steps[2]}">
+              <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="step-text">Delivered</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="order-actions">
+          <button class="action-btn view-btn" onclick="viewOrder('${order.id}')">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          ${order.status === 'pending' ? `
+            <button class="action-btn deliver-btn" onclick="markAsDelivered('${order.id}')">
+              <i class="fas fa-check"></i> Mark as Delivered
+            </button>
+          ` : ''}
+        </div>
+      `;
+      
+      ordersList.appendChild(orderElement);
+    });
+  }
+  
+  // Filter orders by status
+  function filterOrders(filter) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    if (filter === 'all') {
+      renderOrders(orders);
+    } else {
+      const filteredOrders = orders.filter(order => order.status === filter);
+      renderOrders(filteredOrders);
+    }
+  }
+  
+  // Mark order as delivered
+  function markAsDelivered(orderId) {
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const orderIndex = orders.findIndex(order => order.id === orderId);
+    
+    if (orderIndex !== -1) {
+      orders[orderIndex].status = 'delivered';
+      localStorage.setItem('orders', JSON.stringify(orders));
+      loadOrders(); 
+    }
+  }
+  
+  // View order details
+  function viewOrder(orderId) {
+    alert(`Viewing details for order ${orderId}`);
+  }
+  
+  // Initialize
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+  
+  
 </body>
 </html>
