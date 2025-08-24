@@ -1,94 +1,393 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-    body {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
+  <title>Customer Reviews - StyleShop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Global Styles */
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+      --accent: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4cc9f0;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --star-color: #ffc107;
+    }
+    
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    /* Hamburger Button */
-    #hamburger-menu {
-      font-size: 30px;
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #f9fafb;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    button {
       cursor: pointer;
-      padding: 15px;
-      background: #0066cc;
-      color: white;
-      width: 60px;
-      text-align: center;
-      user-select: none;
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 1001;
-      border-radius: 8px;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
-
-    /* Nav Menu (hidden by default) */
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin: 0 12px;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    nav ul li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .cart {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      position: relative;
+      padding: 8px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    
+    .cart:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    #cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--accent);
+      color: white;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Hamburger Menu */
+    #hamburger-menu {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      background: var(--secondary);
+      color: white;
+      border-radius: 4px;
+    }
+    
     .nav-menu {
       position: fixed;
       top: 0;
-      left: -250px; /* boye a gefe */
+      left: -250px;
       width: 220px;
       height: 100%;
-      background: #0066cc;
+      background: var(--secondary);
       padding-top: 60px;
       display: flex;
       flex-direction: column;
       transition: left 0.3s ease-in-out;
       z-index: 1000;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
     }
-
+    
     .nav-menu a {
       color: white;
-      padding: 15px;
+      padding: 15px 20px;
       text-decoration: none;
-      font-weight: bold;
-      border-bottom: 1px solid #004080;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       transition: background 0.2s;
+      display: flex;
+      align-items: center;
     }
-
+    
+    .nav-menu a i {
+      margin-right: 10px;
+    }
+    
     .nav-menu a:hover {
-      background: #0056b3;
+      background: var(--primary);
     }
-
-    .nav-menu a:last-child {
-      border-bottom: none;
-    }
-
-    /* Nuna menu idan an danna */
+    
     .nav-menu.active {
-      left: 0; /* fito daga hagu */
+      left: 0;
+    }
+    
+    /* Overlay for closing menu */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      display: block;
+    }
+    
+    /* Reviews Section */
+    .reviews {
+      padding: 40px 0;
+    }
+    
+    .reviews h1 {
+      font-size: 32px;
+      color: var(--dark);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .reviews h2 {
+      font-size: 24px;
+      color: var(--dark);
+      margin: 40px 0 20px;
+      text-align: center;
+    }
+    
+    /* Review List */
+    #review-list {
+      margin-bottom: 40px;
+    }
+    
+    .review {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s;
+    }
+    
+    .review:hover {
+      transform: translateY(-3px);
+    }
+    
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .review h3 {
+      font-size: 18px;
+      color: var(--primary);
+    }
+    
+    .review-date {
+      color: var(--gray);
+      font-size: 14px;
+    }
+    
+    .review-stars {
+      color: var(--star-color);
+      margin-bottom: 10px;
+    }
+    
+    .review p {
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    /* Review Form */
+    .review-form {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 16px;
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .star-rating {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .star-rating input {
+      display: none;
+    }
+    
+    .star-rating label {
+      font-size: 24px;
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .star-rating input:checked ~ label {
+      color: #ddd;
+    }
+    
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked + label,
+    .star-rating input:checked ~ label {
+      color: var(--star-color);
+    }
+    
+    .submit-btn {
+      background: var(--primary);
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background: var(--secondary);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      nav ul {
+        display: none;
+      }
+      
+      #hamburger-menu {
+        display: block;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .review-date {
+        margin-top: 5px;
+      }
+      
+      .review-form {
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .logo {
+        font-size: 22px;
+      }
+      
+      .reviews h1 {
+        font-size: 28px;
+      }
+      
+      .reviews h2 {
+        font-size: 22px;
+      }
     }
   </style>
-
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title>review👁️‍🗨️</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="index.js" defer></script>
 </head>
 <body>
- 
-  <!-- 🔹 Header / Navigation -->
+  <!-- Overlay for closing menu -->
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Header / Navigation -->
   <header>
-<!-- Hamburger button -->
-  <div id="hamburger-menu">☰</div>
-
-    <!-- Nav menu -->
-  <div class="nav-menu" id="navMenu">
-    <a href="index.html">🏠 Home</a>
-    <a href="profile.html">🚹Profile</a>
-    <a href="delivery.html">🛳️ Delivery order</a>
-    <a href="setting.html">☸️ Setting</a>
-  </div>
-    
-
-    
     <div class="container header-container">
-      <div class="logo" align="center">review👁</div>
+      <div id="hamburger-menu">☰</div>
+      <div class="logo">StyleShop</div>
       <nav>
         <ul>
           <li><a href="aboutus.html">About Us</a></li>
@@ -100,34 +399,101 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <div class="cart">
-        🛒 <span id="cart-count">0</span>
-      </div>
+      <a href="checkout.html" class="cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
     </div>
   </header>
 
+  <!-- Nav menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery Order</a>
+    <a href="setting.html"><i class="fas fa-cog"></i> Settings</a>
+  </div>
+
   <!-- Reviews Section -->
-  <section class="reviews">
+  <section class="reviews container">
     <h1>Customer Reviews</h1>
+
+    <!-- Reviews Summary -->
+    <div class="reviews-summary" style="text-align: center; margin-bottom: 30px;">
+      <div style="font-size: 48px; color: var(--primary); font-weight: bold;">4.7</div>
+      <div class="review-stars" style="font-size: 24px; margin: 10px 0;">★★★★★</div>
+      <p style="color: var(--gray);">Based on 128 reviews</p>
+    </div>
 
     <!-- Existing Reviews -->
     <div id="review-list">
       <div class="review">
-        <h3>Aliyu</h3>
-        <p>Great products and fast delivery! ⭐⭐⭐⭐⭐</p>
+        <div class="review-header">
+          <h3>Aliyu</h3>
+          <span class="review-date">March 15, 2025</span>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>Great products and fast delivery! The quality exceeded my expectations. I will definitely be shopping here again.</p>
       </div>
+      
       <div class="review">
-        <h3>Zainab</h3>
-        <p>Quality is amazing, will shop again. ⭐⭐⭐⭐</p>
+        <div class="review-header">
+          <h3>Zainab</h3>
+          <span class="review-date">March 12, 2025</span>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <p>Quality is amazing, will shop again. The only reason I'm giving 4 stars is because the delivery was a day later than expected.</p>
+      </div>
+      
+      <div class="review">
+        <div class="review-header">
+          <h3>Chinedu</h3>
+          <span class="review-date">March 10, 2025</span>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>Absolutely love my purchase! The customer service was exceptional and the product was exactly as described. 10/10 would recommend!</p>
+      </div>
+      
+      <div class="review">
+        <div class="review-header">
+          <h3>Fatima</h3>
+          <span class="review-date">March 8, 2025</span>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>I've ordered multiple items from this store and I've never been disappointed. The prices are reasonable and the quality is top-notch.</p>
       </div>
     </div>
 
     <!-- Add Review Form -->
     <h2>Add Your Review</h2>
-    <form onsubmit="addReview(event)">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <textarea id="message" placeholder="Write your review..." required></textarea>
-      <button type="submit">Submit Review</button>
+    <form class="review-form" onsubmit="addReview(event)">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Your Rating</label>
+        <div class="star-rating">
+          <input type="radio" id="star5" name="rating" value="5" required>
+          <label for="star5">★</label>
+          <input type="radio" id="star4" name="rating" value="4">
+          <label for="star4">★</label>
+          <input type="radio" id="star3" name="rating" value="3">
+          <label for="star3">★</label>
+          <input type="radio" id="star2" name="rating" value="2">
+          <label for="star2">★</label>
+          <input type="radio" id="star1" name="rating" value="1">
+          <label for="star1">★</label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Your Review</label>
+        <textarea id="message" placeholder="Share your experience with our products and service..." required></textarea>
+      </div>
+      
+      <button type="submit" class="submit-btn">Submit Review</button>
     </form>
   </section>
 
@@ -137,22 +503,92 @@
   </footer>
 
   <script>
+    // Hamburger menu functionality
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('navMenu');
-
-    // Toggle menu idan an danna hamburger
-    hamburger.addEventListener('click', () => {
+    const overlay = document.getElementById('overlay');
+    
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
       navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
     });
-
-    // Rufe menu idan aka danna link
+    
+    // Close menu when clicking on links
     document.querySelectorAll('.nav-menu a').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        overlay.classList.remove('active');
       });
     });
+    
+    // Close menu when clicking outside
+    overlay.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    
+    // Add review functionality
+    function addReview(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const message = document.getElementById('message').value;
+      const rating = document.querySelector('input[name="rating"]:checked').value;
+      
+      if (!name || !message || !rating) {
+        alert('Please fill all fields');
+        return;
+      }
+      
+      // Create new review element
+      const reviewList = document.getElementById('review-list');
+      const newReview = document.createElement('div');
+      newReview.className = 'review';
+      
+      // Get current date
+      const currentDate = new Date();
+      const dateString = currentDate.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      
+      // Create stars based on rating
+      let stars = '';
+      for (let i = 0; i < 5; i++) {
+        stars += i < rating ? '★' : '☆';
+      }
+      
+      newReview.innerHTML = `
+        <div class="review-header">
+          <h3>${name}</h3>
+          <span class="review-date">${dateString}</span>
+        </div>
+        <div class="review-stars">${stars}</div>
+        <p>${message}</p>
+      `;
+      
+      // Add new review at the top of the list
+      reviewList.insertBefore(newReview, reviewList.firstChild);
+      
+      // Reset form
+      document.getElementById('name').value = '';
+      document.getElementById('message').value = '';
+      document.querySelectorAll('input[name="rating"]').forEach(input => {
+        input.checked = false;
+      });
+      
+      // Show success message
+      alert('Thank you for your review!');
+    }
+    
+    // Initialize cart count if needed
+    document.addEventListener('DOMContentLoaded', () => {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCount = document.getElementById('cart-count');
+      cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    });
   </script>
-
-  
 </body>
 </html>
