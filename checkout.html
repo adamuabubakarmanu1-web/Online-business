@@ -6,20 +6,22 @@
   <title>Checkout - Biz Group 4</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* 🔹 General Reset & Variables */
+    /* 🔹 Updated Color Variables */
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --primary-light: #3b82f6;
-      --secondary: #10b981;
-      --accent: #8b5cf6;
-      --dark: #0f172a;
-      --dark-light: #1e293b;
-      --text: #f8fafc;
-      --text-muted: #cbd5e1;
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --primary-light: #5f75ee;
+      --secondary: #06d6a0;
+      --accent: #9d4edd;
+      --dark: #1a202c;
+      --dark-light: #2d3748;
+      --text: #f8f9fa;
+      --text-muted: #e2e8f0;
       --gradient: linear-gradient(135deg, var(--primary), var(--accent));
-      --card-bg: rgba(30, 41, 59, 0.8);
-      --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      --gradient-light: linear-gradient(135deg, var(--primary-light), var(--accent));
+      --card-bg: rgba(45, 55, 72, 0.85);
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.3);
       --transition: all 0.3s ease;
     }
 
@@ -45,7 +47,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      background: 
+        radial-gradient(circle at 15% 50%, rgba(67, 97, 238, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 85% 30%, rgba(157, 78, 221, 0.1) 0%, transparent 20%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
       pointer-events: none;
       z-index: -1;
     }
@@ -80,6 +85,7 @@
     
     #hamburger-menu:hover {
       transform: scale(1.1) rotate(90deg);
+      box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
     }
 
     /* 🔹 Side Nav */
@@ -89,7 +95,7 @@
       left: -280px;
       width: 280px;
       height: 100%;
-      background: var(--dark-light);
+      background: rgba(45, 55, 72, 0.95);
       padding-top: 80px;
       display: flex;
       flex-direction: column;
@@ -111,7 +117,7 @@
     }
     
     .nav-menu a:hover {
-      background: rgba(37, 99, 235, 0.1);
+      background: linear-gradient(90deg, rgba(67, 97, 238, 0.15), transparent);
       padding-left: 30px;
       border-left-color: var(--primary);
     }
@@ -122,7 +128,7 @@
 
     /* 🔹 Header */
     .header-container {
-      background: rgba(17, 24, 39, 0.9);
+      background: rgba(26, 32, 44, 0.95);
       padding: 20px 5%;
       display: flex;
       justify-content: space-between;
@@ -141,7 +147,7 @@
       background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+      text-shadow: 0 0 15px rgba(67, 97, 238, 0.4);
     }
     
     nav ul {
@@ -172,7 +178,7 @@
     }
     
     nav ul li a:hover {
-      color: #38bdf8;
+      color: #a3bffa;
     }
     
     nav ul li a:hover::after {
@@ -182,6 +188,12 @@
     .cart-icon {
       position: relative;
       font-size: 24px;
+      transition: var(--transition);
+    }
+    
+    .cart-icon:hover {
+      transform: scale(1.1);
+      color: var(--secondary);
     }
     
     .cart-count {
@@ -198,6 +210,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 0 10px rgba(6, 214, 160, 0.5);
     }
 
     /* 🔹 Checkout Section */
@@ -215,6 +228,10 @@
       display: inline-block;
       left: 50%;
       transform: translateX(-50%);
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(67, 97, 238, 0.3);
     }
     
     .checkout h1::after {
@@ -248,9 +265,15 @@
       padding: 30px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       position: relative;
       overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .checkout-form:hover, .order-summary:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
     }
     
     .checkout-form::before, .order-summary::before {
@@ -267,6 +290,18 @@
       font-size: 1.5rem;
       margin-bottom: 25px;
       color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .checkout-form h2::before, .order-summary h2::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gradient);
     }
     
     .form-group {
@@ -277,14 +312,15 @@
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
+      color: var(--text-muted);
     }
     
     .form-group input, .form-group select {
       width: 100%;
       padding: 12px 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 8px;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(26, 32, 44, 0.6);
       color: var(--text);
       font-size: 16px;
       transition: var(--transition);
@@ -293,7 +329,8 @@
     .form-group input:focus, .form-group select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
+      background: rgba(26, 32, 44, 0.8);
     }
     
     .form-row {
@@ -310,12 +347,28 @@
       text-align: center;
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .checkout-total::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      opacity: 0.05;
+      z-index: 0;
     }
     
     .checkout-total h3 {
       font-size: 1.8rem;
       color: var(--primary-light);
+      position: relative;
+      z-index: 1;
     }
     
     .btn {
@@ -346,14 +399,14 @@
       left: 0;
       width: 0%;
       height: 100%;
-      background: var(--primary-dark);
+      background: var(--gradient-light);
       transition: var(--transition);
       z-index: -1;
     }
     
     .btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: var(--shadow-hover);
     }
     
     .btn:hover::before {
@@ -365,6 +418,15 @@
       justify-content: space-between;
       padding: 15px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+    
+    .order-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      padding-left: 10px;
+      padding-right: 10px;
+      margin: 0 -10px;
+      border-radius: 8px;
     }
     
     .order-item:last-child {
@@ -376,7 +438,8 @@
     }
     
     .order-item .price {
-      color: var(--primary-light);
+      color: var(--secondary);
+      font-weight: bold;
     }
     
     /* Order Confirmation Modal */
@@ -401,14 +464,15 @@
       text-align: center;
       max-width: 500px;
       width: 90%;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-hover);
       position: relative;
       animation: modalFadeIn 0.5s;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     @keyframes modalFadeIn {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     
     .modal-close {
@@ -419,16 +483,24 @@
       cursor: pointer;
       color: var(--text-muted);
       transition: var(--transition);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
     
     .modal-close:hover {
       color: var(--text);
+      background: rgba(255, 255, 255, 0.1);
     }
     
     .modal-icon {
       font-size: 60px;
       color: var(--secondary);
       margin-bottom: 20px;
+      text-shadow: 0 0 20px rgba(6, 214, 160, 0.4);
     }
     
     .modal h2 {
@@ -444,15 +516,18 @@
     
     .order-details {
       text-align: left;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(26, 32, 44, 0.6);
       padding: 20px;
       border-radius: 8px;
       margin: 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .order-details h3 {
       margin-bottom: 15px;
       color: var(--primary-light);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
     }
     
     .order-details p {
@@ -469,6 +544,7 @@
       border-radius: 20px;
       font-weight: 600;
       margin-top: 15px;
+      box-shadow: 0 0 10px rgba(67, 97, 238, 0.3);
     }
 
     /* 🔹 Footer */
@@ -479,6 +555,17 @@
       padding: 30px 20px;
       margin-top: 80px;
       box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient);
     }
     
     footer p {
@@ -677,162 +764,109 @@
 
   <!-- 🔹 JavaScript -->
   <script>
-    // DOM Elements
-    const hamburger = document.getElementById('hamburger-menu');
-    const navMenu = document.getElementById('navMenu');
-    const cartCount = document.getElementById('cart-count');
-    const checkoutTotal = document.getElementById('checkoutTotal');
-    const orderItems = document.getElementById('orderItems');
-    const checkoutForm = document.getElementById('checkoutForm');
-    const orderModal = document.getElementById('orderModal');
-    const modalClose = document.getElementById('modalClose');
-    const orderDate = document.getElementById('orderDate');
-    const orderTotal = document.getElementById('orderTotal');
-    const orderAddress = document.getElementById('orderAddress');
-    
-    // Sample cart data (in a real app, this would come from your cart system)
-    let cart = [
-      { id: 1, name: 'Product One', price: 20, quantity: 1 },
-      { id: 2, name: 'Product Two', price: 35, quantity: 2 }
-    ];
-    
-    // Initialize the page
-    function init() {
-      updateCartCount();
-      displayOrderSummary();
-      calculateTotal();
-      setCurrentDate();
-      
-      // Hamburger menu functionality
-      hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.innerHTML = navMenu.classList.contains('active') ? 
-          '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-      });
-      
-      // Close menu when clicking on links
-      document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('active');
-          hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+    // 🔹 Hamburger Menu Toggle
+    document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.getElementById("hamburger-menu");
+      const navMenu = document.getElementById("navMenu");
+
+      if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
         });
-      });
-      
-      // Form submission
-      checkoutForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (validateForm()) {
-          processOrder();
-        }
-      });
-      
-      // Close modal
-      modalClose.addEventListener('click', () => {
-        orderModal.style.display = 'none';
-      });
-      
-      // Close modal if clicked outside
-      window.addEventListener('click', (e) => {
-        if (e.target === orderModal) {
-          orderModal.style.display = 'none';
-        }
-      });
-    }
-    
-    // Update cart count
-    function updateCartCount() {
-      const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-      cartCount.textContent = totalItems;
-    }
-    
-    // Display order summary
-    function displayOrderSummary() {
-      orderItems.innerHTML = '';
-      
+      }
+    });
+
+    /* ==============================
+       🛒 CHECKOUT PAGE SCRIPT
+       ============================== */
+
+    // Load cart daga localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderOrderSummary() {
+      const orderItems = document.getElementById("orderItems");
+      const checkoutTotal = document.getElementById("checkoutTotal");
+      const cartCount = document.getElementById("cart-count");
+
+      if (!orderItems || !checkoutTotal) return;
+
+      orderItems.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        orderItems.innerHTML = "<p>Your cart is empty.</p>";
+        checkoutTotal.textContent = "0";
+        if (cartCount) cartCount.textContent = "0";
+        return;
+      }
+
+      // Update cart count
+      if (cartCount) {
+        const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+        cartCount.textContent = itemCount;
+      }
+
       cart.forEach(item => {
-        const itemElement = document.createElement('div');
-        itemElement.className = 'order-item';
-        itemElement.innerHTML = `
-          <span class="name">${item.name} x${item.quantity}</span>
-          <span class="price">$${(item.price * item.quantity).toFixed(2)}</span>
-        `;
-        orderItems.appendChild(itemElement);
+        const div = document.createElement("div");
+        div.classList.add("order-item");
+        div.innerHTML = `<span class="name">${item.name} x ${item.quantity}</span>
+                         <span class="price">$${(item.price * item.quantity).toFixed(2)}</span>`;
+        orderItems.appendChild(div);
+        total += item.price * item.quantity;
       });
-    }
-    
-    // Calculate total
-    function calculateTotal() {
-      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
       checkoutTotal.textContent = total.toFixed(2);
     }
-    
-    // Set current date
-    function setCurrentDate() {
-      const now = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      orderDate.textContent = now.toLocaleDateString('en-US', options);
-    }
-    
-    // Validate form
-    function validateForm() {
-      // Simple validation - in a real app, you'd want more robust validation
-      const cardNumber = document.getElementById('cardNumber').value;
-      const expiry = document.getElementById('expiry').value;
-      const cvv = document.getElementById('cvv').value;
-      
-      if (cardNumber.replace(/\s/g, '').length !== 16) {
-        alert('Please enter a valid 16-digit card number');
-        return false;
-      }
-      
-      if (!/^\d{2}\/\d{2}$/.test(expiry)) {
-        alert('Please enter expiry date in MM/YY format');
-        return false;
-      }
-      
-      if (!/^\d{3,4}$/.test(cvv)) {
-        alert('Please enter a valid CVV (3 or 4 digits)');
-        return false;
-      }
-      
-      return true;
-    }
-    
-    // Process order
-    function processOrder() {
-      // Get form values
-      const fullName = document.getElementById('fullName').value;
-      const email = document.getElementById('email').value;
-      const address = document.getElementById('address').value;
-      const city = document.getElementById('city').value;
-      
-      // Generate random order ID
-      const orderId = 'BG4-' + Math.floor(10000 + Math.random() * 90000);
-      document.getElementById('orderId').textContent = orderId;
-      
-      // Set order details
-      orderTotal.textContent = checkoutTotal.textContent;
-      orderAddress.textContent = `${address}, ${city}`;
-      
-      // Show modal
-      orderModal.style.display = 'flex';
-      
-      // In a real app, you would send this data to your server here
-      console.log('Order processed:', {
-        orderId,
-        customer: { fullName, email, address, city },
-        items: cart,
-        total: checkoutTotal.textContent,
-        status: 'pending'
+
+    renderOrderSummary();
+
+    const checkoutForm = document.getElementById("checkoutForm");
+    if (checkoutForm) {
+      checkoutForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+          return;
+        }
+
+        // Show order confirmation modal
+        const modal = document.getElementById("orderModal");
+        if (modal) {
+          // Set order details
+          const orderDate = document.getElementById("orderDate");
+          const orderTotal = document.getElementById("orderTotal");
+          const orderAddress = document.getElementById("orderAddress");
+          
+          if (orderDate) orderDate.textContent = new Date().toLocaleDateString();
+          if (orderTotal) orderTotal.textContent = document.getElementById("checkoutTotal").textContent;
+          if (orderAddress) orderAddress.textContent = document.getElementById("address").value;
+          
+          modal.style.display = "flex";
+        }
+
+        // Clear cart
+        cart = [];
+        localStorage.removeItem("cart");
+        renderOrderSummary();
       });
-      
-      // Clear cart
-      cart = [];
-      updateCartCount();
     }
-    
-    // Initialize the page when loaded
-    document.addEventListener('DOMContentLoaded', init);
+
+    // Close modal functionality
+    const modalClose = document.getElementById("modalClose");
+    if (modalClose) {
+      modalClose.addEventListener("click", function() {
+        const modal = document.getElementById("orderModal");
+        if (modal) modal.style.display = "none";
+      });
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener("click", function(event) {
+      const modal = document.getElementById("orderModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
