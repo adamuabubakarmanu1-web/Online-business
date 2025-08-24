@@ -3,243 +3,376 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title>Biz Group 4 - Profile</title>
-  
-</head>
-  
+  <title>User Profile - StyleShop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f7fb;
-      color: #333;
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+      --accent: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
     }
 
-    /* Hamburger */
-    #hamburger-menu {
-      font-size: 30px;
-      cursor: pointer;
-      padding: 15px;
-      background: #0066cc;
-      color: white;
-      width: 60px;
-      text-align: center;
-      user-select: none;
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 1001;
-      border-radius: 8px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 220px;
-      height: 100%;
-      background: #0066cc;
-      padding-top: 60px;
-      display: flex;
-      flex-direction: column;
-      transition: left 0.3s ease-in-out;
-      z-index: 1000;
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background: #f4f6fb;
     }
-    .nav-menu a {
-      color: white;
-      padding: 15px;
-      text-decoration: none;
-      font-weight: bold;
-      border-bottom: 1px solid #004080;
-    }
-    .nav-menu a:hover { background: #0056b3; }
-    .nav-menu.active { left: 0; }
 
     /* Header */
     header {
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
       padding: 15px 0;
-      margin-left: 80px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
-      z-index: 500;
+      z-index: 100;
     }
+
     .header-container {
+      width: 90%;
+      margin: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1000px;
-      margin: auto;
-      padding: 0 20px;
     }
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #0066cc;
-    }
-    nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
-    nav ul li { margin: 0 10px; }
-    nav ul li a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #333;
-    }
-    nav ul li a:hover { color: #0066cc; }
 
-    /* Profile Card */
-    .profile-card {
-      max-width: 450px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
     }
-    .profile-pic {
-      width: 130px;
-      height: 130px;
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .cart {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      position: relative;
+    }
+
+    #cart-count {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--accent);
+      color: white;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Profile Section */
+    .profile-section {
+      margin: 40px auto;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .profile-image-container {
+      position: relative;
+      margin: 0 auto 20px;
+      width: 140px;
+      height: 140px;
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #0066cc;
+      border: 4px solid var(--primary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    .btn {
-      margin: 10px 5px;
-      padding: 8px 15px;
-      background: #0066cc;
+
+    .change-image-btn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: var(--primary);
       color: white;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .change-image-btn:hover {
+      background: var(--secondary);
+    }
+
+    .profile-info {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .info-group {
+      margin-bottom: 15px;
+    }
+
+    .info-group label {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .info-value {
+      font-size: 17px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    .edit-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--light-gray);
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+
+    .profile-actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 12px 22px;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary);
+    }
+
+    .btn-secondary {
+      background: var(--light-gray);
+      color: var(--dark);
+      padding: 12px 22px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
       cursor: pointer;
       transition: 0.3s;
     }
-    .btn:hover { background: #004c99; }
-    .profile-info h3 { margin: 15px 0 5px; }
-    .profile-info p { margin: 4px 0; color: #555; }
 
-    /* Inputs hidden by default */
-    .edit-input {
-      display: none;
-      margin: 8px 0;
-      padding: 8px;
-      width: 80%;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+    .btn-secondary:hover {
+      background: #dcdcdc;
     }
 
+    /* Footer */
     footer {
-      background: #333;
+      background: var(--dark);
       color: white;
       text-align: center;
-      padding: 15px;
-      margin-top: 50px;
+      padding: 20px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-
-  <!-- 🔹 Header / Navigation -->
   <header>
-    <div id="hamburger-menu">☰</div>
-
-    <div class="nav-menu" id="navMenu">
-      <a href="index.html">🏠 Home</a>
-      <a href="profile.html">🚹 Profile</a>
-      <a href="delivery.html">🛳️ Delivery order</a>
-      <a href="setting.html">☸️ Setting</a>
-    </div>
-
-    <div class="container header-container">
-      <div class="logo">Biz Group 4</div>
+    <div class="header-container">
+      <div class="logo">StyleShop</div>
       <nav>
         <ul>
           <li><a href="aboutus.html">About Us</a></li>
           <li><a href="shop.html">Shop</a></li>
           <li><a href="offers.html">Special Offers</a></li>
-          <li><a href="Mreviews.html">Reviews</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
           <li><a href="faqs.html">FAQs</a></li>
           <li><a href="checkout.html">Checkout</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <div>
-        <a href="checkout.html"><h3>🛒 Cart (<span id="cart-count">0</span>)</h3></a>
-      </div>
+      <a href="checkout.html" class="cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
     </div>
   </header>
 
-  <!-- 🔹 Profile Section -->
-  <main>
+  <section class="profile-section">
     <div class="profile-card">
-      <img id="profileImage" src="https://via.placeholder.com/130" alt="Profile" class="profile-pic">
-      <input type="file" id="fileInput" style="display:none" accept="image/*">
-
-      <div class="profile-info">
-        <h3 id="displayName">John Doe</h3>
-        <input type="text" id="editName" class="edit-input" placeholder="Enter new name">
-        <p id="displayEmail"><strong>Email:</strong> johndoe@email.com</p>
-        <input type="email" id="editEmail" class="edit-input" placeholder="Enter new email">
-        <p><strong>Member Since:</strong> Jan 2025</p>
+      <div class="profile-image-container">
+        <img id="profileImage" src="https://via.placeholder.com/150/4361ee/ffffff?text=User" alt="Profile" class="profile-image">
+        <div class="change-image-btn" id="changePhotoBtn">
+          <i class="fas fa-camera"></i>
+        </div>
+        <input type="file" id="fileInput" style="display:none" accept="image/*">
       </div>
 
-      <!-- Buttons -->
-      <button class="btn" id="editBtn">✏️ Edit Profile</button>
-      <button class="btn" id="saveBtn" style="display:none;">💾 Save</button>
-      <button class="btn" id="changePhotoBtn" style="display:none;">📷 Change Photo</button>
-    </div>
-  </main>
+      <h2 style="margin-bottom:10px;">Your Profile</h2>
+      <p style="color:var(--gray); margin-bottom:25px;">Manage your personal details</p>
 
-  <!-- 🔹 Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+      <div class="profile-info">
+        <div class="info-group">
+          <label>Full Name</label>
+          <div class="info-value" id="displayName">John Doe</div>
+          <input type="text" id="editName" class="edit-input" style="display:none;">
+        </div>
+
+        <div class="info-group">
+          <label>Email Address</label>
+          <div class="info-value" id="displayEmail">johndoe@example.com</div>
+          <input type="email" id="editEmail" class="edit-input" style="display:none;">
+        </div>
+
+        <div class="info-group">
+          <label>Phone Number</label>
+          <div class="info-value" id="displayPhone">+1 (555) 123-4567</div>
+          <input type="tel" id="editPhone" class="edit-input" style="display:none;">
+        </div>
+
+        <div class="info-group">
+          <label>Member Since</label>
+          <div class="info-value">January 2025</div>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn-primary" id="editBtn"><i class="fas fa-edit"></i> Edit Profile</button>
+        <button class="btn-secondary" id="saveBtn" style="display:none;"><i class="fas fa-save"></i> Save</button>
+        <button class="btn-secondary" id="cancelBtn" style="display:none;"><i class="fas fa-times"></i> Cancel</button>
+      </div>
     </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
   </footer>
 
-  <!-- 🔹 JS -->
   <script>
-    const hamburger = document.getElementById('hamburger-menu');
-    const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
-
-    // Profile Elements
     const editBtn = document.getElementById('editBtn');
     const saveBtn = document.getElementById('saveBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const displayName = document.getElementById('displayName');
+    const displayEmail = document.getElementById('displayEmail');
+    const displayPhone = document.getElementById('displayPhone');
+    const editName = document.getElementById('editName');
+    const editEmail = document.getElementById('editEmail');
+    const editPhone = document.getElementById('editPhone');
+
+    let originalName, originalEmail, originalPhone;
+
+    editBtn.addEventListener('click', () => {
+      editBtn.style.display = 'none';
+      saveBtn.style.display = 'inline-block';
+      cancelBtn.style.display = 'inline-block';
+
+      originalName = displayName.textContent;
+      originalEmail = displayEmail.textContent;
+      originalPhone = displayPhone.textContent;
+
+      editName.style.display = 'block';
+      editEmail.style.display = 'block';
+      editPhone.style.display = 'block';
+
+      displayName.style.display = 'none';
+      displayEmail.style.display = 'none';
+      displayPhone.style.display = 'none';
+
+      editName.value = originalName;
+      editEmail.value = originalEmail;
+      editPhone.value = originalPhone;
+    });
+
+    saveBtn.addEventListener('click', () => {
+      displayName.textContent = editName.value;
+      displayEmail.textContent = editEmail.value;
+      displayPhone.textContent = editPhone.value;
+
+      editName.style.display = 'none';
+      editEmail.style.display = 'none';
+      editPhone.style.display = 'none';
+
+      displayName.style.display = 'block';
+      displayEmail.style.display = 'block';
+      displayPhone.style.display = 'block';
+
+      editBtn.style.display = 'inline-block';
+      saveBtn.style.display = 'none';
+      cancelBtn.style.display = 'none';
+
+      alert('Profile updated successfully!');
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      displayName.textContent = originalName;
+      displayEmail.textContent = originalEmail;
+      displayPhone.textContent = originalPhone;
+
+      editName.style.display = 'none';
+      editEmail.style.display = 'none';
+      editPhone.style.display = 'none';
+
+      displayName.style.display = 'block';
+      displayEmail.style.display = 'block';
+      displayPhone.style.display = 'block';
+
+      editBtn.style.display = 'inline-block';
+      saveBtn.style.display = 'none';
+      cancelBtn.style.display = 'none';
+    });
+
+    // Change profile photo
     const changePhotoBtn = document.getElementById('changePhotoBtn');
     const fileInput = document.getElementById('fileInput');
     const profileImage = document.getElementById('profileImage');
 
-    const displayName = document.getElementById('displayName');
-    const displayEmail = document.getElementById('displayEmail');
-    const editName = document.getElementById('editName');
-    const editEmail = document.getElementById('editEmail');
-
-    // Edit Mode
-    editBtn.addEventListener('click', () => {
-      editBtn.style.display = "none";
-      saveBtn.style.display = "inline-block";
-      changePhotoBtn.style.display = "inline-block";
-
-      editName.style.display = "block";
-      editEmail.style.display = "block";
-
-      editName.value = displayName.innerText;
-      editEmail.value = displayEmail.innerText.replace("Email: ", "");
-    });
-
-    // Save Changes
-    saveBtn.addEventListener('click', () => {
-      displayName.innerText = editName.value;
-      displayEmail.innerHTML = "<strong>Email:</strong> " + editEmail.value;
-
-      editName.style.display = "none";
-      editEmail.style.display = "none";
-      saveBtn.style.display = "none";
-      changePhotoBtn.style.display = "none";
-      editBtn.style.display = "inline-block";
-    });
-
-    // Change Photo
     changePhotoBtn.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', function () {
       const file = this.files[0];
@@ -249,7 +382,13 @@
         reader.readAsDataURL(file);
       }
     });
-  </script>
 
+    // Update cart count
+    document.addEventListener('DOMContentLoaded', () => {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent =
+        cart.reduce((total, item) => total + item.quantity, 0);
+    });
+  </script>
 </body>
 </html>
