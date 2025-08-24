@@ -29,6 +29,71 @@
       background: #f4f6fb;
     }
 
+    /* Hamburger Menu */
+    #hamburger-menu {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      background: var(--secondary);
+      color: white;
+      border-radius: 4px;
+    }
+    
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 220px;
+      height: 100%;
+      background: var(--secondary);
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-menu a {
+      color: white;
+      padding: 15px 20px;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-menu a i {
+      margin-right: 10px;
+    }
+    
+    .nav-menu a:hover {
+      background: var(--primary);
+    }
+    
+    .nav-menu.active {
+      left: 0;
+    }
+    
+    /* Overlay for closing menu */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      display: block;
+    }
+
     /* Header */
     header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -42,6 +107,7 @@
 
     .header-container {
       width: 90%;
+      max-width: 1200px;
       margin: auto;
       display: flex;
       justify-content: space-between;
@@ -221,11 +287,47 @@
       padding: 20px;
       margin-top: 40px;
     }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      nav ul {
+        display: none;
+      }
+      
+      #hamburger-menu {
+        display: block;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .profile-actions {
+        flex-direction: column;
+      }
+      
+      .profile-card {
+        padding: 25px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .logo {
+        font-size: 22px;
+      }
+      
+      .profile-section {
+        margin: 20px auto;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Overlay for closing menu -->
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Header / Navigation -->
   <header>
     <div class="header-container">
+      <div id="hamburger-menu">☰</div>
       <div class="logo">StyleShop</div>
       <nav>
         <ul>
@@ -244,6 +346,14 @@
       </a>
     </div>
   </header>
+
+  <!-- Nav menu -->
+  <div class="nav-menu" id="navMenu">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery Order</a>
+    <a href="setting.html"><i class="fas fa-cog"></i> Settings</a>
+  </div>
 
   <section class="profile-section">
     <div class="profile-card">
@@ -296,6 +406,32 @@
   </footer>
 
   <script>
+    // Hamburger menu functionality
+    const hamburger = document.getElementById('hamburger-menu');
+    const navMenu = document.getElementById('navMenu');
+    const overlay = document.getElementById('overlay');
+    
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on links
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+      });
+    });
+    
+    // Close menu when clicking outside
+    overlay.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+
+    // Profile editing functionality
     const editBtn = document.getElementById('editBtn');
     const saveBtn = document.getElementById('saveBtn');
     const cancelBtn = document.getElementById('cancelBtn');
