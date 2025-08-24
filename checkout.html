@@ -763,110 +763,131 @@
   </footer>
 
   <!-- 🔹 JavaScript -->
-  <script>
-    // 🔹 Hamburger Menu Toggle
-    document.addEventListener("DOMContentLoaded", () => {
-      const hamburger = document.getElementById("hamburger-menu");
-      const navMenu = document.getElementById("navMenu");
 
-      if (hamburger && navMenu) {
-        hamburger.addEventListener("click", () => {
-          navMenu.classList.toggle("active");
-        });
-      }
+
+  <script>
+  // 🔹 Hamburger Menu Toggle
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger-menu");
+    const navMenu = document.getElementById("navMenu");
+
+    if (hamburger && navMenu) {
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+    }
+  });
+
+  /* ==============================
+     🛒 CHECKOUT PAGE SCRIPT
+     ============================== */
+
+  // Load cart daga localStorage
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function renderOrderSummary() {
+    const orderItems = document.getElementById("orderItems");
+    const checkoutTotal = document.getElementById("checkoutTotal");
+    const cartCount = document.getElementById("cart-count");
+
+    if (!orderItems || !checkoutTotal) return;
+
+    orderItems.innerHTML = "";
+    let total = 0;
+
+    if (cart.length === 0) {
+      orderItems.innerHTML = "<p>Your cart is empty.</p>";
+      checkoutTotal.textContent = "0";
+      if (cartCount) cartCount.textContent = "0";
+      return;
+    }
+
+    // Update cart count
+    if (cartCount) {
+      const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+      cartCount.textContent = itemCount;
+    }
+
+    cart.forEach(item => {
+      const div = document.createElement("div");
+      div.classList.add("order-item");
+      div.innerHTML = `<span class="name">${item.name} x ${item.quantity}</span>
+                       <span class="price">$${(item.price * item.quantity).toFixed(2)}</span>`;
+      orderItems.appendChild(div);
+      total += item.price * item.quantity;
     });
 
-    /* ==============================
-       🛒 CHECKOUT PAGE SCRIPT
-       ============================== */
+    checkoutTotal.textContent = total.toFixed(2);
+  }
 
-    // Load cart daga localStorage
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  renderOrderSummary();
 
-    function renderOrderSummary() {
-      const orderItems = document.getElementById("orderItems");
-      const checkoutTotal = document.getElementById("checkoutTotal");
-      const cartCount = document.getElementById("cart-count");
-
-      if (!orderItems || !checkoutTotal) return;
-
-      orderItems.innerHTML = "";
-      let total = 0;
+  // 🔹 Handle Checkout Form
+  const checkoutForm = document.getElementById("checkoutForm");
+  if (checkoutForm) {
+    checkoutForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
       if (cart.length === 0) {
-        orderItems.innerHTML = "<p>Your cart is empty.</p>";
-        checkoutTotal.textContent = "0";
-        if (cartCount) cartCount.textContent = "0";
+        alert("Your cart is empty!");
         return;
       }
 
-      // Update cart count
-      if (cartCount) {
-        const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
-        cartCount.textContent = itemCount;
-      }
+      const address = document.getElementById("address").value;
+      const total = parseFloat(document.getElementById("checkoutTotal").textContent);
 
-      cart.forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("order-item");
-        div.innerHTML = `<span class="name">${item.name} x ${item.quantity}</span>
-                         <span class="price">$${(item.price * item.quantity).toFixed(2)}</span>`;
-        orderItems.appendChild(div);
-        total += item.price * item.quantity;
-      });
+      // ===== Create New Order =====
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      const newOrder = {
+        id: "BG4-" + Math.floor(10000 + Math.random() * 90000),
+        date: new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+        status: "pending",
+        items: cart,
+        address: address,
+        total: total
+      };
+      orders.push(newOrder);
+      localStorage.setItem("orders", JSON.stringify(orders));
 
-      checkoutTotal.textContent = total.toFixed(2);
-    }
-
-    renderOrderSummary();
-
-    const checkoutForm = document.getElementById("checkoutForm");
-    if (checkoutForm) {
-      checkoutForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        if (cart.length === 0) {
-          alert("Your cart is empty!");
-          return;
-        }
-
-        // Show order confirmation modal
-        const modal = document.getElementById("orderModal");
-        if (modal) {
-          // Set order details
-          const orderDate = document.getElementById("orderDate");
-          const orderTotal = document.getElementById("orderTotal");
-          const orderAddress = document.getElementById("orderAddress");
-          
-          if (orderDate) orderDate.textContent = new Date().toLocaleDateString();
-          if (orderTotal) orderTotal.textContent = document.getElementById("checkoutTotal").textContent;
-          if (orderAddress) orderAddress.textContent = document.getElementById("address").value;
-          
-          modal.style.display = "flex";
-        }
-
-        // Clear cart
-        cart = [];
-        localStorage.removeItem("cart");
-        renderOrderSummary();
-      });
-    }
-
-    // Close modal functionality
-    const modalClose = document.getElementById("modalClose");
-    if (modalClose) {
-      modalClose.addEventListener("click", function() {
-        const modal = document.getElementById("orderModal");
-        if (modal) modal.style.display = "none";
-      });
-    }
-
-    // Close modal when clicking outside
-    window.addEventListener("click", function(event) {
+      // ===== Show Confirmation Modal =====
       const modal = document.getElementById("orderModal");
-      if (event.target === modal) {
-        modal.style.display = "none";
+      if (modal) {
+        const orderDate = document.getElementById("orderDate");
+        const orderTotal = document.getElementById("orderTotal");
+        const orderAddress = document.getElementById("orderAddress");
+
+        if (orderDate) orderDate.textContent = newOrder.date;
+        if (orderTotal) orderTotal.textContent = newOrder.total.toFixed(2);
+        if (orderAddress) orderAddress.textContent = newOrder.address;
+
+        modal.style.display = "flex";
       }
+
+      // Clear cart
+      cart = [];
+      localStorage.removeItem("cart");
+      renderOrderSummary();
     });
-  </script>
+  }
+
+  // 🔹 Close modal functionality
+  const modalClose = document.getElementById("modalClose");
+  if (modalClose) {
+    modalClose.addEventListener("click", function () {
+      const modal = document.getElementById("orderModal");
+      if (modal) modal.style.display = "none";
+    });
+  }
+
+  // 🔹 Close modal when clicking outside
+  window.addEventListener("click", function (event) {
+    const modal = document.getElementById("orderModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+</script>
+  
+  
 </body>
 </html>
