@@ -1,765 +1,781 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.4">
-  <title>About Us - Biz Group 4</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* 🔹 General Reset & Variables */
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --primary-light: #3b82f6;
-      --secondary: #10b981;
-      --accent: #8b5cf6;
-      --dark: #0f172a;
-      --dark-light: #1e293b;
-      --text: #f8fafc;
-      --text-muted: #cbd5e1;
-      --gradient: linear-gradient(135deg, var(--primary), var(--accent));
-      --card-bg: rgba(30, 41, 59, 0.8);
-      --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      --transition: all 0.3s ease;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+    <title>About Us - Biz Group 4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+    <style>
+        /* 🔹 General Reset & Variables */
+        :root {
+            --primary: #1e40af; /* Blue */
+            --primary-dark: #1e3a8a;
+            --primary-light: #2563eb;
+            --secondary: #059669; /* Green */
+            --accent: #d946ef; /* Purple */
+            --dark: #0f172a; /* Slate-900 */
+            --dark-light: #1e293b; /* Slate-800 */
+            --text: #e2e8f0; /* Slate-200 */
+            --text-muted: #94a3b8; /* Slate-400 */
+            --gradient-main: linear-gradient(45deg, var(--primary), var(--accent));
+            --gradient-dark: linear-gradient(120deg, var(--dark), var(--dark-light));
+            --card-bg: rgba(30, 41, 59, 0.85); /* Dark card with transparency */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, var(--dark), var(--dark-light));
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-      position: relative;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-      pointer-events: none;
-      z-index: -1;
-    }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.1) 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(217, 70, 239, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        body::after {
+             content: '';
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.02"><path fill="%23FFFFFF" d="M100 0L0 100h100z" /></svg>') repeat;
+             background-size: 8px;
+             pointer-events: none;
+             z-index: -1;
+        }
 
-    a { 
-      text-decoration: none;
-      color: var(--text);
-    }
+        a {
+            text-decoration: none;
+            color: var(--text);
+            transition: var(--transition);
+        }
 
-    /* 🔹 Hamburger Button */
-    #hamburger-menu {
-      font-size: 24px;
-      cursor: pointer;
-      padding: 12px;
-      background: var(--gradient);
-      color: white;
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      user-select: none;
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      z-index: 1001;
-      border-radius: 50%;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    #hamburger-menu:hover {
-      transform: scale(1.1) rotate(90deg);
-    }
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(217, 70, 239, 0.2);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-main);
+            border-radius: 2px;
+            animation: expandLine 1.5s ease-out;
+        }
 
-    /* 🔹 Side Nav */
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      left: -280px;
-      width: 280px;
-      height: 100%;
-      background: var(--dark-light);
-      padding-top: 80px;
-      display: flex;
-      flex-direction: column;
-      transition: var(--transition);
-      z-index: 1000;
-      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-    }
+        /* 🔹 Header / Navigation */
+        .header-container {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .nav-menu a {
-      color: var(--text);
-      padding: 18px 25px;
-      font-weight: 600;
-      border-left: 4px solid transparent;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .nav-menu a:hover {
-      background: rgba(37, 99, 235, 0.1);
-      padding-left: 30px;
-      border-left-color: var(--primary);
-    }
-    
-    .nav-menu.active { 
-      left: 0; 
-    }
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
 
-    /* 🔹 Header */
-    .header-container {
-      background: rgba(17, 24, 39, 0.9);
-      padding: 20px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-    }
-    
-    nav ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    
-    nav ul li a {
-      color: var(--text);
-      font-weight: 600;
-      transition: var(--transition);
-      position: relative;
-      padding: 8px 5px;
-    }
-    
-    nav ul li a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient);
-      transition: var(--transition);
-    }
-    
-    nav ul li a:hover {
-      color: #38bdf8;
-    }
-    
-    nav ul li a:hover::after {
-      width: 100%;
-    }
-    
-    .cart-icon {
-      position: relative;
-      font-size: 24px;
-    }
-    
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: var(--secondary);
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        /* cart count style */
+        .cart-icon {
+            position: relative;
+            font-size: 24px;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    /* 🔹 About Section */
-    .about {
-      padding: 80px 5%;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .about h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      text-align: center;
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
-    .about h1::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: var(--gradient);
-      border-radius: 2px;
-    }
-    
-    .about-content {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 40px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 40px;
-    }
-    
-    .about-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: var(--gradient);
-    }
-    
-    .about p {
-      margin-bottom: 20px;
-      line-height: 1.8;
-      font-size: 1.1rem;
-    }
-    
-    .mission-vision {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin: 40px 0;
-    }
-    
-    @media (max-width: 768px) {
-      .mission-vision {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    .mission, .vision {
-      background: rgba(15, 23, 42, 0.6);
-      padding: 25px;
-      border-radius: 10px;
-      border-left: 4px solid var(--primary);
-    }
-    
-    .mission h2, .vision h2 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: var(--primary-light);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    /* 🔹 Team Section */
-    .team {
-      padding: 40px 5%;
-      text-align: center;
-    }
-    
-    .team h2 {
-      font-size: 2rem;
-      margin-bottom: 40px;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .team h2::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: var(--gradient);
-      border-radius: 2px;
-    }
-    
-    .toggle-team-btn {
-      padding: 12px 25px;
-      border: none;
-      background: var(--gradient);
-      color: white;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: var(--transition);
-      margin-bottom: 30px;
-      box-shadow: var(--shadow);
-    }
-    
-    .toggle-team-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
-    
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
-    
-    .member {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 25px 20px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .member::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: var(--gradient);
-    }
-    
-    .member:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    }
-    
-    .member-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 20px;
-      border: 4px solid var(--primary);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    
-    .member h3 {
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-      color: var(--primary-light);
-    }
-    
-    .member-role {
-      color: var(--secondary);
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
-    
-    .member-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    
-    .member-social {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .member-social a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: var(--gradient);
-      color: white;
-      border-radius: 50%;
-      font-size: 16px;
-      transition: var(--transition);
-    }
-    
-    .member-social a:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
-    }
-    
-    /* Values Section */
-    .values {
-      padding: 60px 5%;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .values h2 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 40px;
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
-    .values h2::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: var(--gradient);
-      border-radius: 2px;
-    }
-    
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-    
-    .value-item {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .value-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    }
-    
-    .value-icon {
-      font-size: 40px;
-      color: var(--primary-light);
-      margin-bottom: 20px;
-    }
-    
-    .value-item h3 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      color: var(--primary-light);
-    }
-    
-    .value-item p {
-      color: var(--text-muted);
-    }
+        nav ul li a {
+            font-weight: 600;
+            position: relative;
+            padding: 8px 5px;
+            transition: color 0.3s ease;
+        }
 
-    /* 🔹 Footer */
-    footer {
-      background: linear-gradient(120deg, var(--dark), var(--dark-light));
-      color: var(--text);
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 80px;
-      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
-    }
-    
-    footer p {
-      font-size: 1.1rem;
-    }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
 
-    /* 🔹 Responsive Design */
-    @media (max-width: 992px) {
-      .header-container {
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      nav ul {
-        gap: 15px;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .about h1, .team h2, .values h2 {
-        font-size: 1.8rem;
-      }
-      
-      .about-content {
-        padding: 25px;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      nav ul {
-        justify-content: center;
-      }
-      
-      .about, .team, .values {
-        padding: 40px 15px;
-      }
-    }
-    
-    /* Animation for team section */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .team-grid {
-      animation: fadeIn 0.5s ease-out;
-    }
-  </style>
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger & Side Nav - Now optional for mobile-only */
+        #hamburger-menu {
+            display: none; /* Hidden on large screens */
+            font-size: 24px;
+            cursor: pointer;
+            padding: 12px;
+            background: var(--gradient-main);
+            color: white;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            user-select: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            border-radius: 50%;
+            box-shadow: var(--shadow-strong);
+            transition: var(--transition);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: var(--dark-light);
+            backdrop-filter: blur(10px);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            transition: left 0.4s ease-in-out;
+            z-index: 1000;
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu a {
+            color: var(--text);
+            padding: 18px 25px;
+            font-weight: 600;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(37, 99, 235, 0.1);
+            padding-left: 30px;
+            border-left-color: var(--primary);
+        }
+
+        /* 🔹 About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-strong);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: scaleIn 0.8s ease-out;
+        }
+        
+        .about-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        
+        .about-content .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient-main);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        
+        .about-content .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(217, 70, 239, 0.3);
+        }
+
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .mission, .vision {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow-light);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .mission:hover, .vision:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mission h2, .vision h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+        
+        .mission p, .vision p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* 🔹 Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .value-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+        
+        .value-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+            border-radius: 15px 15px 0 0;
+            transition: width 0.3s ease;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .value-item:hover::before {
+            width: 100%;
+        }
+
+        .value-icon {
+            font-size: 48px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .value-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .value-item p {
+            color: var(--text-muted);
+        }
+
+        /* 🔹 Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .member {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .member:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .member-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--accent);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+        
+        .member:hover .member-img {
+            transform: rotate(5deg) scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .member-role {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .member-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .member-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--dark-light);
+            color: var(--text-muted);
+            border-radius: 50%;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .member-social a:hover {
+            background: var(--gradient-main);
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(217, 70, 239, 0.3);
+        }
+
+        .toggle-team-btn {
+            display: block;
+            margin: 0 auto 40px;
+            padding: 12px 25px;
+            border: none;
+            background: var(--gradient-main);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle-team-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(217, 70, 239, 0.3);
+        }
+        
+        .toggle-team-btn i {
+            margin-right: 8px;
+        }
+
+        /* 🔹 Footer */
+        footer {
+            background: var(--dark-light);
+            color: var(--text);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        footer p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* 🔹 Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                justify-content: center;
+            }
+            nav ul {
+                gap: 15px;
+            }
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+            .logo {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .cart-icon {
+                margin-left: 0;
+            }
+            #hamburger-menu {
+                display: flex; /* Yanzu zai bayyana a wayar hannu */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .about-content {
+                padding: 30px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 80px; }
+        }
+    </style>
 </head>
 <body>
- 
-  <!-- 🔹 Header / Navigation -->
-  <header>
-    <div id="hamburger-menu"><i class="fas fa-bars"></i></div>
-    <div class="nav-menu" id="navMenu">
-      <a href="index.html"><i class="fas fa-home"></i> Home</a>
-      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
-      <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery order</a>
-      <a href="setting.html"><i class="fas fa-cog"></i> Setting</a>
-    </div>
     
-    <div class="header-container">
-      <div class="logo">Biz Group 4</div>
-      <nav>
-        <ul>
-          <li><a href="aboutus.html">About Us</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="offers.html">Special Offers</a></li>
-          <li><a href="reviews.html">Reviews</a></li>
-          <li><a href="faqs.html">FAQs</a></li>
-          <li><a href="checkout.html">Checkout</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div>
-        <a href="checkout.html" class="cart-icon">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="cart-count" id="cart-count">0</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- 🔹 About Section -->
-  <section class="about">
-    <h1>About Biz Group 4</h1>
-    
-    <div class="about-content">
-      <p>
-        Biz Group 4 is a student project e-commerce website created to showcase and sell
-        amazing products online. Our mission is to learn and apply web technologies in
-        real-world applications while providing a seamless shopping experience for our customers.
-      </p>
-      
-      <p>
-        We are passionate about creating innovative solutions and delivering value through
-        our platform. Our team consists of dedicated students who are committed to excellence
-        in both design and functionality.
-      </p>
-      
-      <div class="mission-vision">
-        <div class="mission">
-          <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
-          <p>To provide quality products and a seamless shopping experience that exceeds customer expectations while serving as a learning platform for web development.</p>
+    <header>
+        <div id="hamburger-menu"><i class="fas fa-bars"></i></div>
+        <div class="nav-menu" id="navMenu">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="delivery.html"><i class="fas fa-shipping-fast"></i> Delivery order</a>
+            <a href="setting.html"><i class="fas fa-cog"></i> Setting</a>
         </div>
         
-        <div class="vision">
-          <h2><i class="fas fa-eye"></i> Our Vision</h2>
-          <p>To become a leading student-driven online marketplace that bridges the gap between academic learning and real-world e-commerce applications.</p>
+        <div class="header-container">
+            <div class="logo">Biz Group 4</div>
+            <nav>
+                <ul>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="offers.html">Special Offers</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="checkout.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- 🔹 Values Section -->
-  <section class="values">
-    <h2>Our Values</h2>
-    
-    <div class="values-grid">
-      <div class="value-item">
-        <div class="value-icon">
-          <i class="fas fa-graduation-cap"></i>
-        </div>
-        <h3>Learning</h3>
-        <p>We prioritize education and skill development through hands-on experience with modern web technologies.</p>
-      </div>
-      
-      <div class="value-item">
-        <div class="value-icon">
-          <i class="fas fa-users"></i>
-        </div>
-        <h3>Collaboration</h3>
-        <p>We believe in the power of teamwork and collaborative problem-solving to create exceptional results.</p>
-      </div>
-      
-      <div class="value-item">
-        <div class="value-icon">
-          <i class="fas fa-lightbulb"></i>
-        </div>
-        <h3>Innovation</h3>
-        <p>We embrace creative thinking and innovative approaches to overcome challenges and improve our platform.</p>
-      </div>
-      
-      <div class="value-item">
-        <div class="value-icon">
-          <i class="fas fa-hand-holding-heart"></i>
-        </div>
-        <h3>Customer Focus</h3>
-        <p>We are committed to providing an exceptional user experience and value for our customers.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 🔹 Team Section -->
-  <section class="team">
-    <h2>Meet Our Team</h2>
-    
-    <button class="toggle-team-btn" onclick="toggleTeam()">
-      <i class="fas fa-users"></i> Show Our Team
-    </button>
-    
-    <div id="team" style="display: none;">
-      <div class="team-grid">
-        <div class="member">
-          <img src="FB_IMG_17554287061601160.jpg" alt="Adamu Abubakar" class="member-img">
-          <h3>Adamu Abubakar</h3>
-          <div class="member-role">Team Leader</div>
-          <p class="member-desc">Oversees project direction and coordinates team efforts to ensure successful delivery.</p>
-          <div class="member-social">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
+    <section class="about">
+        <h1 class="section-title">About Biz Group 4</h1>
         
-        <div class="member">
-          <img src="https://via.placeholder.com/150" alt="Aisha Bello" class="member-img">
-          <h3>Aisha Bello</h3>
-          <div class="member-role">Frontend Developer</div>
-          <p class="member-desc">Creates engaging user interfaces with a focus on responsive design and user experience.</p>
-          <div class="member-social">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-          </div>
+        <div class="about-content">
+            <p>
+                Biz Group 4 is a student project e-commerce website created to showcase and sell
+                amazing products online. Our mission is to learn and apply web technologies in
+                real-world applications while providing a seamless shopping experience for our customers.
+            </p>
+            
+            <p>
+                We are passionate about creating innovative solutions and delivering value through
+                our platform. Our team consists of dedicated students who are committed to excellence
+                in both design and functionality. We strive to build a platform that is not only
+                functional but also a joy to use.
+            </p>
+            
+            <div class="mission-vision-grid">
+                <div class="mission">
+                    <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
+                    <p>To provide quality products and a seamless shopping experience that exceeds customer expectations while serving as a learning platform for web development.</p>
+                </div>
+                
+                <div class="vision">
+                    <h2><i class="fas fa-eye"></i> Our Vision</h2>
+                    <p>To become a leading student-driven online marketplace that bridges the gap between academic learning and real-world e-commerce applications.</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="member">
-          <img src="https://via.placeholder.com/150" alt="Umar Musa" class="member-img">
-          <h3>Umar Musa</h3>
-          <div class="member-role">Backend Developer</div>
-          <p class="member-desc">Develops server-side functionality and ensures smooth operation of the e-commerce platform.</p>
-          <div class="member-social">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        
-        <div class="member">
-          <img src="https://via.placeholder.com/150" alt="Fatima Ahmed" class="member-img">
-          <h3>Fatima Ahmed</h3>
-          <div class="member-role">UI/UX Designer</div>
-          <p class="member-desc">Designs intuitive user interfaces and ensures a seamless user experience across the platform.</p>
-          <div class="member-social">
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 🔹 Footer -->
-  <footer>
-    <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
-  </footer>
+    <section class="values">
+        <h2 class="section-title">Our Values</h2>
+        
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Learning</h3>
+                <p>We prioritize education and skill development through hands-on experience with modern web technologies.</p>
+            </div>
+            
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Collaboration</h3>
+                <p>We believe in the power of teamwork and collaborative problem-solving to create exceptional results.</p>
+            </div>
+            
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Innovation</h3>
+                <p>We embrace creative thinking and innovative approaches to overcome challenges and improve our platform.</p>
+            </div>
+            
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Customer Focus</h3>
+                <p>We are committed to providing an exceptional user experience and value for our customers.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- 🔹 JavaScript -->
-  <script>
-    // DOM Elements
-    const hamburger = document.getElementById('hamburger-menu');
-    const navMenu = document.getElementById('navMenu');
-    const cartCount = document.getElementById('cart-count');
-    const teamSection = document.getElementById('team');
-    const toggleButton = document.querySelector('.toggle-team-btn');
-    
-    // Initialize the page
-    function init() {
-      updateCartCount();
-      
-      // Hamburger menu functionality
-      hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.innerHTML = navMenu.classList.contains('active') ? 
-          '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-      });
-      
-      // Close menu when clicking on links
-      document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('active');
-          hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-        });
-      });
-    }
-    
-    // Update cart count
-    function updateCartCount() {
-      // In a real app, this would come from your cart system
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
-      cartCount.textContent = totalItems;
-    }
-    
-    // Toggle team visibility
-    function toggleTeam() {
-      if (teamSection.style.display === "none") {
-        teamSection.style.display = "block";
-        toggleButton.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Our Team';
-      } else {
-        teamSection.style.display = "none";
-        toggleButton.innerHTML = '<i class="fas fa-users"></i> Show Our Team';
-      }
-    }
-    
-    // Initialize the page when loaded
-    document.addEventListener('DOMContentLoaded', init);
-  </script>
+    <section class="team">
+        <h2 class="section-title">Meet Our Team</h2>
+        
+        <button class="toggle-team-btn" onclick="toggleTeam()">
+            <i class="fas fa-users"></i> Show Our Team
+        </button>
+        
+        <div id="team" style="display: none;">
+            <div class="team-grid">
+                <div class="member">
+                    <img src="FB_IMG_17554287061601160.jpg" alt="Adamu Abubakar" class="member-img">
+                    <h3>Adamu Abubakar</h3>
+                    <div class="member-role">Team Leader</div>
+                    <p class="member-desc">Oversees project direction and coordinates team efforts to ensure successful delivery.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="member">
+                    <img src="https://via.placeholder.com/150" alt="Aisha Bello" class="member-img">
+                    <h3>Aisha Bello</h3>
+                    <div class="member-role">Frontend Developer</div>
+                    <p class="member-desc">Creates engaging user interfaces with a focus on responsive design and user experience.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="member">
+                    <img src="https://via.placeholder.com/150" alt="Umar Musa" class="member-img">
+                    <h3>Umar Musa</h3>
+                    <div class="member-role">Backend Developer</div>
+                    <p class="member-desc">Develops server-side functionality and ensures smooth operation of the e-commerce platform.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="member">
+                    <img src="https://via.placeholder.com/150" alt="Fatima Ahmed" class="member-img">
+                    <h3>Fatima Ahmed</h3>
+                    <div class="member-role">UI/UX Designer</div>
+                    <p class="member-desc">Designs intuitive user interfaces and ensures a seamless user experience across the platform.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Biz Group 4. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('navMenu');
+        const cartCount = document.getElementById('cart-count');
+        const teamSection = document.getElementById('team');
+        const toggleButton = document.querySelector('.toggle-team-btn');
+        
+        // Initialize the page
+        function init() {
+            updateCartCount();
+            
+            // Hamburger menu functionality
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.innerHTML = navMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close menu when clicking on links
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
+        
+        // Update cart count
+        function updateCartCount() {
+            // In a real app, this would come from your cart system
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+            cartCount.textContent = totalItems;
+        }
+        
+        // Toggle team visibility
+        function toggleTeam() {
+            if (teamSection.style.display === "none") {
+                teamSection.style.display = "block";
+                toggleButton.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Our Team';
+            } else {
+                teamSection.style.display = "none";
+                toggleButton.innerHTML = '<i class="fas fa-users"></i> Show Our Team';
+            }
+        }
+        
+        // Initialize the page when loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
-</html>. my
+</html>
